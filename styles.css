@@ -276,3 +276,42 @@ model-viewer {
   color: white;
   font-size: 12px;
 }
+/* ---------------------------------------------------------
+   BRANDING BAR (TOP HEADER)
+--------------------------------------------------------- */
+#branding-bar {
+  position: fixed;
+  top: 0;
+  left: 260px; /* aligns with sidebar width */
+  width: calc(100vw - 260px);
+  height: 60px;
+  background: #0d1b2a;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 20;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#branding-logo {
+  height: 40px;
+  width: auto;
+  margin-right: 15px;
+}
+
+#branding-title {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------------------------------------------------------
+   OPTIONAL SIDEBAR LOGO
+--------------------------------------------------------- */
+#sidebar-logo {
+  width: 180px;
+  margin-bottom: 20px;
+  display: block;
+}

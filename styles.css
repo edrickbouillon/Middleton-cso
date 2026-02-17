@@ -1,206 +1,65 @@
-:not(:defined) > * {
-  display: none;
-}
-
-html {
-  height: 100%;
-}
-
-body {
+/* RESET */
+html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
   height: 100%;
-}
-
-model-viewer {
-  width: 100%;
-  height: 90%;
-  background-color: #ffffff;
-}
-
-.Hotspot {
-  background: #fff;
-  border-radius: 32px;
-  border: 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  box-sizing: border-box;
-  cursor: pointer;
-  height: 24px;
-  padding: 8px;
-  position: relative;
-  transition: opacity 0.3s;
-  width: 24px;
-}
-
-.Hotspot:not([data-visible]) {
-  background: transparent;
-  border: 4px solid #fff;
-  box-shadow: none;
-  height: 32px;
-  pointer-events: none;
-  width: 32px;
-}
-
-.Hotspot:focus {
-  border: 4px solid rgb(0, 128, 200);
-  height: 32px;
-  outline: none;
-  width: 32px;
-}
-
-.Hotspot > * {
-  opacity: 1;
-  transform: translateY(-50%);
-}
-
-.HotspotAnnotation{
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-  color: rgba(0, 0, 0, 0.8);
-  display: block;
-  font-family: Futura, Helvetica Neue, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  left: calc(100% + 1em);
-  max-width: 128px;
-  overflow-wrap: break-word;
-  padding: 0.5em 1em;
-  position: absolute;
-  top: 50%;
-  width: max-content;
-}
-
-.Hotspot:not([data-visible]) > * {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(calc(-50% + 4px));
-  transition: transform 0.3s, opacity 0.3s;
-}
-
-
-.progress-bar {
-  display: block;
-  width: 33%;
-  height: 10%;
-  max-height: 2%;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  border-radius: 25px;
-  box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.5), 0px 0px 5px 1px rgba(0, 0, 0, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.progress-bar.hide {
-  visibility: hidden;
-  transition: visibility 0.3s;
-}
-
-.update-bar {
-  background-color: rgba(255, 255, 255, 0.9);
-  width: 0%;
-  height: 100%;
-  border-radius: 25px;
-  float: left;
-  transition: width 0.3s;
-}
-
-#ar-button {
-  background-image: url(ar_icon.png);
-  background-repeat: no-repeat;
-  background-size: 20px 20px;
-  background-position: 12px 50%;
-  background-color: #fff;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  bottom: 16px;
-  padding: 0px 16px 0px 40px;
-  font-family: Roboto Regular, Helvetica Neue, sans-serif;
-  font-size: 14px;
-  color:#4285f4;
-  height: 36px;
-  line-height: 36px;
-  border-radius: 18px;
-  border: 1px solid #DADCE0;
-}
-
-#ar-button:active {
-  background-color: #E8EAED;
-}
-
-#ar-button:focus {
-  outline: none;
-}
-
-#ar-button:focus-visible {
-  outline: 1px solid #4285f4;
-}
-
-@keyframes circle {
-  from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
-  to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
-}
-
-@keyframes elongate {
-  from { transform: translateX(100px); }
-  to   { transform: translateX(-100px); }
-}
-
-model-viewer > #ar-prompt {
-  position: absolute;
-  left: 50%;
-  bottom: 60px;
-  animation: elongate 2s infinite ease-in-out alternate;
-  display: none;
-}
-
-model-viewer[ar-status="session-started"] > #ar-prompt {
-  display: block;
-}
-
-model-viewer > #ar-prompt > img {
-  animation: circle 4s linear infinite;
-}
-/* ---------------------------------------------------------
-   SIDEBAR PANEL
---------------------------------------------------------- */
-#tour-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 260px;
-  height: 100vh;
-  background: rgba(20, 20, 20, 0.92);
-  color: white;
-  padding: 20px;
-  box-sizing: border-box;
-  backdrop-filter: blur(6px);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  z-index: 10;
+  overflow: hidden;
   font-family: Arial, sans-serif;
 }
 
-#tour-sidebar h2 {
-  margin-top: 0;
-  font-size: 22px;
-  font-weight: 600;
+/* BRANDING BAR */
+#branding-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100vw;
+  background: #0d1b2a;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 20;
 }
 
-#tour-description {
-  font-size: 14px;
-  line-height: 1.4;
-  margin-bottom: 20px;
+#branding-logo {
+  height: 40px;
+  margin-right: 15px;
 }
 
-/* ---------------------------------------------------------
-   TOUR BUTTONS
---------------------------------------------------------- */
+/* SIDEBAR */
+#tour-sidebar {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 260px;
+  height: calc(100vh - 60px);
+  background: rgba(20,20,20,0.95);
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 15;
+  transition: transform 0.3s ease;
+}
+
+#tour-sidebar.collapsed {
+  transform: translateX(-220px);
+}
+
+#sidebar-toggle {
+  position: absolute;
+  right: -40px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  background: #3a7afe;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 0 6px 6px 0;
+}
+
+/* TOUR BUTTONS */
 #tour-controls {
   display: flex;
   flex-direction: column;
@@ -209,109 +68,80 @@ model-viewer > #ar-prompt > img {
 
 .tour-btn {
   padding: 10px;
-  background: #3a7afe;
   border: none;
+  background: #3a7afe;
   color: white;
-  font-size: 14px;
-  border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
+  border-radius: 6px;
 }
 
 .tour-btn:hover {
   background: #1e5be0;
 }
 
-/* ---------------------------------------------------------
-   FLOATING HOTSPOT LIST
---------------------------------------------------------- */
+/* HOTSPOT LIST */
 #hotspot-list {
   position: fixed;
-  top: 20px;
+  top: 80px;
   right: 20px;
-  width: 180px;
-  background: rgba(0, 0, 0, 0.75);
-  padding: 12px;
-  border-radius: 8px;
-  backdrop-filter: blur(4px);
-  z-index: 10;
+  z-index: 15;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
 .hotspot-list-item {
-  background: #ffffff22;
-  border: 1px solid #ffffff33;
-  padding: 8px;
+  background: rgba(0,0,0,0.75);
   color: white;
+  padding: 8px;
   border-radius: 6px;
+  border: none;
   cursor: pointer;
-  font-size: 13px;
-  transition: 0.2s;
 }
 
-.hotspot-list-item:hover {
-  background: #3a7afe;
-  border-color: #3a7afe;
-}
-
-/* ---------------------------------------------------------
-   MODEL-VIEWER LAYOUT ADJUSTMENT
---------------------------------------------------------- */
+/* MODEL VIEWER */
 model-viewer {
-  margin-left: 260px; /* Make space for sidebar */
-  width: calc(100vw - 260px);
-  height: 100vh;
-  background-color: #111;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  background: #111;
 }
 
-/* ---------------------------------------------------------
-   HOTSPOT LABELS
---------------------------------------------------------- */
+/* HOTSPOTS */
+.Hotspot {
+  background: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+}
+
 .HotspotAnnotation {
-  background: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.75);
+  color: white;
   padding: 4px 8px;
   border-radius: 4px;
-  color: white;
   font-size: 12px;
 }
-/* ---------------------------------------------------------
-   BRANDING BAR (TOP HEADER)
---------------------------------------------------------- */
-#branding-bar {
-  position: fixed;
-  top: 0;
-  left: 260px; /* aligns with sidebar width */
-  width: calc(100vw - 260px);
-  height: 60px;
-  background: #0d1b2a;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 20;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+/* PROGRESS */
+.progress-bar {
+  width: 30%;
+  height: 8px;
+  background: rgba(0,0,0,0.5);
+  border-radius: 4px;
 }
 
-#branding-logo {
-  height: 40px;
-  width: auto;
-  margin-right: 15px;
-}
-
-#branding-title {
-  font-size: 20px;
-  font-weight: 600;
-  font-family: Arial, sans-serif;
-}
-
-/* ---------------------------------------------------------
-   OPTIONAL SIDEBAR LOGO
---------------------------------------------------------- */
-#sidebar-logo {
-  width: 180px;
-  margin-bottom: 20px;
-  display: block;
+.update-bar {
+  height: 100%;
+  width: 0%;
+  background: white;
+  border-radius: 4px;
 }

@@ -167,3 +167,112 @@ model-viewer[ar-status="session-started"] > #ar-prompt {
 model-viewer > #ar-prompt > img {
   animation: circle 4s linear infinite;
 }
+/* ---------------------------------------------------------
+   SIDEBAR PANEL
+--------------------------------------------------------- */
+#tour-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: rgba(20, 20, 20, 0.92);
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  backdrop-filter: blur(6px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 10;
+  font-family: Arial, sans-serif;
+}
+
+#tour-sidebar h2 {
+  margin-top: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+#tour-description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+/* ---------------------------------------------------------
+   TOUR BUTTONS
+--------------------------------------------------------- */
+#tour-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tour-btn {
+  padding: 10px;
+  background: #3a7afe;
+  border: none;
+  color: white;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tour-btn:hover {
+  background: #1e5be0;
+}
+
+/* ---------------------------------------------------------
+   FLOATING HOTSPOT LIST
+--------------------------------------------------------- */
+#hotspot-list {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 180px;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 12px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hotspot-list-item {
+  background: #ffffff22;
+  border: 1px solid #ffffff33;
+  padding: 8px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.hotspot-list-item:hover {
+  background: #3a7afe;
+  border-color: #3a7afe;
+}
+
+/* ---------------------------------------------------------
+   MODEL-VIEWER LAYOUT ADJUSTMENT
+--------------------------------------------------------- */
+model-viewer {
+  margin-left: 260px; /* Make space for sidebar */
+  width: calc(100vw - 260px);
+  height: 100vh;
+  background-color: #111;
+}
+
+/* ---------------------------------------------------------
+   HOTSPOT LABELS
+--------------------------------------------------------- */
+.HotspotAnnotation {
+  background: rgba(0, 0, 0, 0.75);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+}

@@ -1,48 +1,92 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <body>
-    <!-- CLIENT BRANDING HEADER -->
-    <div id="branding-bar">
-      <img id="branding-logo" src="client-logo.png" alt="Client Logo">
-      <span id="branding-title">Middleton CSO Interactive 3D Tour</span>
-    </div>
-    <title>&lt;model-viewer&gt; Edrick-MGroup</title>
-    <meta charset="utf-8">
-    <meta name="description" content="&lt;model-viewer&gt; template">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link type="text/css" href="./styles.css" rel="stylesheet"/>
-  </head>
-  <body>
-    <!-- <model-viewer> HTML element -->
-    <model-viewer src="Middleton CSO GA 6.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="1" environment-image="pillars_1k.hdr" skybox-image="pillars_1k.hdr" camera-orbit="-769.9deg 78deg 143.3m" field-of-view="15.67deg" auto-rotate>
-      <button class="Hotspot" slot="hotspot-1" data-position="50.83530921614001m 3.4407640237040393m -2.1000697111230977m" data-normal="-0.16491202523858245m 0.9820874077834825m -0.09115013661442899m" data-visibility-attribute="visible">
-          <div class="HotspotAnnotation">Pumps</div>
-      </button><button class="Hotspot" slot="hotspot-2" data-position="56.015996143743806m 12.541570000000013m 0.1926866652410566m" data-normal="5.020582508817582e-19m 1m -2.2204460492503126e-16m" data-visibility-attribute="visible">
-          <div class="HotspotAnnotation">Detention tank </div>
-      </button><button class="Hotspot" slot="hotspot-3" data-position="61.46801175439614m 14.025597192429936m 7.275931632142223m" data-normal="-0.9045782553985017m 0m -0.4263076117784005m" data-visibility-attribute="visible">
-          <div class="HotspotAnnotation">Motor Control Centre</div>
-      </button><button class="Hotspot" slot="hotspot-4" data-position="45.06344578142664m 11.640952095946494m -5.326984610386797m" data-normal="0.11606307467718502m -0.5978245988575739m 0.7931803777812831m" data-visibility-attribute="visible">
-          <div class="HotspotAnnotation">Valves</div>
-      </button><button class="Hotspot" slot="hotspot-5" data-position="82.74799653044343m 12.821880316283927m -33.74915558656196m" data-normal="-0.6728708814295855m -1.3657874906240922e-15m -0.739759945471619m" data-visibility-attribute="visible">
-          <div class="HotspotAnnotation">Storm Screen</div>
-      </button><button class="Hotspot" slot="hotspot-6" data-position="109.87593351344168m 10.368782663786966m -27.63417744587516m" data-normal="0.890579390725399m 1.006596830798353e-15m 0.4548278232641197m" data-visibility-attribute="visible">
-          <div class="HotspotAnnotation">Overflow</div>
-      </button><button class="Hotspot" slot="hotspot-7" data-position="104.52325017829581m 9.483000007629414m -13.684395866056622m" data-normal="0m 1m -2.220446049250313e-16m" data-visibility-attribute="visible">
-          <div class="HotspotAnnotation">River Wharfe</div>
-      </button>
-      <div class="progress-bar hide" slot="progress-bar">
-          <div class="update-bar"></div>
-      </div>
-      <button slot="ar-button" id="ar-button">
-          View in your space
-      </button>
-      <div id="ar-prompt">
-          <img src="ar_hand_prompt.png">
-      </div>
-    </model-viewer>  
-    <script src="script.js"></script>
-    <!-- FIXED: Load model-viewer with a real version number -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <title>Middleton CSO Interactive 3D Tour</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Model Viewer -->
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js">
+  </script>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div id="tour-sidebar" class="collapsed">
+  <button id="sidebar-toggle">☰</button>
+
+  <h2 id="tour-title">CSO Tour</h2>
+  <p id="tour-description">Click Start to begin the guided tour.</p>
+
+  <div id="tour-controls">
+    <button id="tour-start" class="tour-btn">Start</button>
+    <button id="tour-prev" class="tour-btn">Previous</button>
+    <button id="tour-next" class="tour-btn">Next</button>
+  </div>
+</div>
+
+<!-- BRANDING BAR -->
+<div id="branding-bar">
+  <img id="branding-logo" src="client-logo.png" alt="Client Logo">
+  <span id="branding-title">Middleton CSO Interactive 3D Tour</span>
+</div>
+
+<!-- FLOATING HOTSPOT LIST -->
+<div id="hotspot-list"></div>
+
+<!-- MODEL VIEWER -->
+<model-viewer
+  id="viewer"
+  src="Middleton CSO GA 6.glb"
+  camera-controls
+  ar
+  ar-modes="webxr scene-viewer quick-look"
+  environment-image="pillars_1k.hdr"
+  skybox-image="pillars_1k.hdr"
+  shadow-intensity="1"
+  tone-mapping="neutral"
+  auto-rotate>
+
+  <!-- HOTSPOTS -->
+  <button class="Hotspot" slot="hotspot-1" data-position="50.8m 3.4m -2.1m">
+    <div class="HotspotAnnotation">Pumps</div>
+  </button>
+
+  <button class="Hotspot" slot="hotspot-2" data-position="56m 12.5m 0.2m">
+    <div class="HotspotAnnotation">Detention Tank</div>
+  </button>
+
+  <button class="Hotspot" slot="hotspot-3" data-position="61.4m 14m 7.2m">
+    <div class="HotspotAnnotation">MCC</div>
+  </button>
+
+  <button class="Hotspot" slot="hotspot-4" data-position="45m 11.6m -5.3m">
+    <div class="HotspotAnnotation">Valves</div>
+  </button>
+
+  <button class="Hotspot" slot="hotspot-5" data-position="82.7m 12.8m -33.7m">
+    <div class="HotspotAnnotation">Storm Screen</div>
+  </button>
+
+  <button class="Hotspot" slot="hotspot-6" data-position="109.8m 10.3m -27.6m">
+    <div class="HotspotAnnotation">Overflow</div>
+  </button>
+
+  <button class="Hotspot" slot="hotspot-7" data-position="104.5m 9.4m -13.6m">
+    <div class="HotspotAnnotation">River Wharfe</div>
+  </button>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar" slot="progress-bar">
+    <div class="update-bar"></div>
+  </div>
+
+</model-viewer>
+
+<script src="script.js"></script>
+</body>
 </html>

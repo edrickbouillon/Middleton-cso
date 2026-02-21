@@ -1,57 +1,92 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+const viewer = document.getElementById("viewer");
 const sidebar = document.getElementById("sidebar");
 const toggle = document.getElementById("sidebarToggle");
 const presentationBtn = document.getElementById("presentationToggle");
 const container = document.getElementById("hotspotContainer");
 const hotspots = document.querySelectorAll(".Hotspot");
 
+/* Sidebar Toggle */
 toggle.addEventListener("click", () => {
-sidebar.classList.toggle("collapsed");
+  sidebar.classList.toggle("collapsed");
 });
 
 /* Presentation Mode */
 presentationBtn.addEventListener("click", () => {
-document.body.classList.toggle("presentation-mode");
+  document.body.classList.toggle("presentation-mode");
 });
 
-/* Sidebar Content */
-const hotspotData = [
-{ name: "Dirty-water", img: "images/dirty-water.webp" },
-{ name: "Cleaned-water", img: "images/cleaned-water.webp" },
-{ name: "Tank Inlet", img: "images/tank-inlet.webp" },
-{ name: "Underground Tank", img: "images/underground-tank.webp" },
-{ name: "Pumps", img: "images/pumps.webp" },
-{ name: "Taps", img: "images/taps.webp" },
-{ name: "River", img: "images/river.webp" }
-];
+/* Hotspot Data with Camera Targets */
+const hotspotData = {
+  "Dirty-water": {
+    target: "50.835m 3.44m -2.10m",
+    orbit: "45deg 75deg 120m"
+  },
+  "Cleaned-water": {
+    target: "56.01m 12.54m 0.19m",
+    orbit: "30deg 70deg 130m"
+  },
+  "Tank Inlet": {
+    target: "61.46m 14.02m 7.27m",
+    orbit: "10deg 65deg 110m"
+  },
+  "Underground Tank": {
+    target: "45.06m 11.64m -5.32m",
+    orbit: "0deg 80deg 150m"
+  },
+  "Pumps": {
+    target: "82.74m 12.82m -33.74m",
+    orbit: "-20deg 75deg 120m"
+  },
+  "Taps": {
+    target: "109.87m 10.36m -27.63m",
+    orbit: "-40deg 70deg 130m"
+  },
+  "River": {
+    target: "104.52m 9.48m -13.68m",
+    orbit: "90deg 80deg 180m"
+  }
+};
 
-hotspotData.forEach(data => {
+/* Fade-in Sidebar */
+Object.keys(hotspotData).forEach(name => {
 
-const section = document.createElement("div");
-section.className = "hotspot-section";
+  const section = document.createElement("div");
+  section.className = "hotspot-section";
 
-section.innerHTML = `
-<h3>${data.name}</h3>
-<img src="${data.img}" alt="${data.name}" />
-`;
+  section.innerHTML = `<h3>${name}</h3>`;
+  container.appendChild(section);
 
-container.appendChild(section);
-
-setTimeout(() => {
-section.classList.add("visible");
-}, 200);
+  setTimeout(() => {
+    section.classList.add("visible");
+  }, 200);
 
 });
 
-/* Glow on click */
+/* Camera Fly-To Animation */
 hotspots.forEach(hotspot => {
-hotspot.addEventListener("click", () => {
 
-hotspots.forEach(h => h.classList.remove("active"));
-hotspot.classList.add("active");
+  hotspot.addEventListener("click", () => {
 
-});
+    const name = hotspot.dataset.name;
+    const data = hotspotData[name];
+
+    if (!data) return;
+
+    /* Remove previous glow */
+    hotspots.forEach(h => h.classList.remove("active"));
+    hotspot.classList.add("active");
+
+    /* Stop auto rotate */
+    viewer.autoRotate = false;
+
+    /* Smooth transition */
+    viewer.cameraTarget = data.target;
+    viewer.cameraOrbit = data.orbit;
+
+  });
+
 });
 
 });

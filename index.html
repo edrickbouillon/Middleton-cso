@@ -1,122 +1,73 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Interactive 3D Tour</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Interactive 3D Tour</title>
 
-  <link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css" />
 
-  <!-- Model Viewer -->
-  <script type="module"
-    src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js">
-  </script>
+<script type="module"
+src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js">
+</script>
 </head>
 
 <body>
 
+<!-- Presentation Mode Toggle -->
+<button id="presentationToggle">Presentation Mode</button>
+
 <!-- Sidebar -->
 <div id="sidebar" class="collapsed">
-  <button id="sidebarToggle">☰</button>
-  <h2>Explore the Site</h2>
-  <div id="hotspotContainer"></div>
+<button id="sidebarToggle">☰</button>
+<h2>Explore the Site</h2>
+<div id="hotspotContainer"></div>
 </div>
 
 <!-- 3D Viewer -->
 <model-viewer
-  id="viewer"
-  src="Middleton CSO 05.glb"
-  ar
-  ar-modes="webxr scene-viewer quick-look"
-  camera-controls
-  tone-mapping="neutral"
-  poster="poster.webp"
-  shadow-intensity="1"
-  environment-image="pillars_1k.hdr"
-  skybox-image="pillars_1k.hdr"
-  camera-orbit="-1.335deg 72.66deg 145.8m"
-  field-of-view="20.46deg"
-  auto-rotate
+id="viewer"
+src="Middleton CSO GA 6.glb"
+ar
+ar-modes="webxr scene-viewer quick-look"
+camera-controls
+tone-mapping="neutral"
+shadow-intensity="1"
+auto-rotate
 >
 
-  <!-- AR Button -->
-  <button slot="ar-button" id="ar-button">
-    View in your space
-  </button>
+<button slot="ar-button" id="ar-button">
+View in your space
+</button>
 
-  <!-- HOTSPOTS (All 12) -->
+<!-- Hotspots -->
+<button class="Hotspot" slot="hotspot-1" data-name="Dirty-water" data-position="50m 3m -2m">
+<div class="HotspotAnnotation">Dirty-water</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-1"
-    data-name="Dirty-water"
-    data-position="-53.55690620040539m 9.417966195388189m -7.581029327335008m">
-    <div class="HotspotAnnotation">Dirty-water</div>
-  </button>
+<button class="Hotspot" slot="hotspot-2" data-name="Cleaned-water" data-position="56m 12m 0m">
+<div class="HotspotAnnotation">Cleaned-water</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-2"
-    data-name="Cleaned-water"
-    data-position="-31.394524712207698m 10.560982711151755m -23.65884092712994m">
-    <div class="HotspotAnnotation">Cleaned-water</div>
-  </button>
+<button class="Hotspot" slot="hotspot-3" data-name="Tank Inlet" data-position="61m 14m 7m">
+<div class="HotspotAnnotation">Tank Inlet</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-3"
-    data-name="Tank Inlet"
-    data-position="-19.052055012347594m 10.691816716647558m -14.11043054419387m">
-    <div class="HotspotAnnotation">Tank Inlet</div>
-  </button>
+<button class="Hotspot" slot="hotspot-4" data-name="Underground Tank" data-position="45m 11m -5m">
+<div class="HotspotAnnotation">Underground Tank</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-4"
-    data-name="Underground Tank"
-    data-position="-20.32176802519635m 12.841570000000061m -8.262070520784713m">
-    <div class="HotspotAnnotation">Underground Tank</div>
-  </button>
+<button class="Hotspot" slot="hotspot-5" data-name="Pumps" data-position="82m 12m -33m">
+<div class="HotspotAnnotation">Pumps</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-5"
-    data-name="Pumps"
-    data-position="-21.448711865887965m 3.3300919385259093m -7.649042713086014m">
-    <div class="HotspotAnnotation">Pumps</div>
-  </button>
+<button class="Hotspot" slot="hotspot-6" data-name="Taps" data-position="109m 10m -27m">
+<div class="HotspotAnnotation">Taps</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-6"
-    data-name="Taps"
-    data-position="-26.554924603312937m 11.206681926538971m -3.7292205750518086m">
-    <div class="HotspotAnnotation">Taps</div>
-  </button>
-
-  <button class="Hotspot" slot="hotspot-7"
-    data-name="Return-water"
-    data-position="-44.41865490541074m 11.689974081988195m -17.66553041401104m">
-    <div class="HotspotAnnotation">Return-water</div>
-  </button>
-
-  <button class="Hotspot" slot="hotspot-8"
-    data-name="Send to water cleaner"
-    data-position="7.13007243248121m 7.98636317955442m -1.7892815492279706m">
-    <div class="HotspotAnnotation">Send to water cleaner</div>
-  </button>
-
-  <button class="Hotspot" slot="hotspot-9"
-    data-name="Power"
-    data-position="-7.331196774243906m 14.634594217122133m -9.98775551839098m">
-    <div class="HotspotAnnotation">Power</div>
-  </button>
-
-  <button class="Hotspot" slot="hotspot-10"
-    data-name="River"
-    data-position="4.560973276183306m 9.483000007629457m -54.83351453875412m">
-    <div class="HotspotAnnotation">River</div>
-  </button>
-
-  <button class="Hotspot" slot="hotspot-11"
-    data-name="Emergency overflow"
-    data-position="-4.028493327374909m 9.52849201263884m -53.85522056156557m">
-    <div class="HotspotAnnotation">Emergency overflow</div>
-  </button>
-
-  <button class="Hotspot" slot="hotspot-12"
-    data-name="Johnny"
-    data-position="-28.035635825183117m 13.982639057824581m -4.961047429424513m">
-    <div class="HotspotAnnotation">Johnny</div>
-  </button>
+<button class="Hotspot" slot="hotspot-7" data-name="River" data-position="104m 9m -13m">
+<div class="HotspotAnnotation">River</div>
+</button>
 
 </model-viewer>
 

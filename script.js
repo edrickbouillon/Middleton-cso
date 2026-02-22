@@ -18,17 +18,20 @@ function animateCamera(targetOrbit, targetFov, targetTarget) {
 }
 
 /* ============================
-   HOTSPOT DATA (12 ITEMS)
+   START VIEW (FULL MODEL)
    ============================ */
 const startView = {
   name: "Collective Dirty Water Overflow",
   explanation:
     "This is the whole CSO system working together. All the dirty water from homes, streets and rainstorms comes here to be safely managed. Press NEXT and I’ll show you each part step by step!",
   photo: "",
-  fov: 60,
-  dist: 80
+  fov: 65,
+  dist: 120
 };
 
+/* ============================
+   HOTSPOT DATA (12 ITEMS)
+   ============================ */
 const hotspotData = [
   {
     name: "Dirty-water",
@@ -136,13 +139,12 @@ let currentStep = 0;
 function goToStep(index) {
   const step = hotspotData[index];
   const hotspotEl = viewer.querySelector(`[slot="hotspot-${index + 1}"]`);
-
   if (!hotspotEl) return;
 
   // Remove highlight from all hotspots
   viewer.querySelectorAll(".Hotspot").forEach(h => h.classList.remove("active"));
 
-  // Highlight the active hotspot
+  // Highlight active hotspot
   hotspotEl.classList.add("active");
 
   // Camera movement
@@ -165,13 +167,21 @@ function goToStep(index) {
   document.getElementById("hotspot-explanation").innerText = step.explanation;
   document.getElementById("hotspot-photo").innerText = step.photo;
 
-  // Sidebar image
+  // Sidebar image (slug-safe)
   const img = document.getElementById("photo-image");
-  img.src = `images/${step.name.toLowerCase().replace(/ /g, "-")}.webp`;
+  const slug = step.name
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  img.src = `images/${slug}.webp`;
   img.style.display = "block";
 
   currentStep = index;
 }
+
 /* ============================
    SIDEBAR BUTTONS
    ============================ */
@@ -183,13 +193,16 @@ document.getElementById("tour-start").onclick = () => {
     { x: 0, y: 10, z: 0 }
   );
 
-  // Update sidebar
+  // Sidebar text
   document.getElementById("hotspot-name").innerText = startView.name;
   document.getElementById("hotspot-explanation").innerText = startView.explanation;
   document.getElementById("hotspot-photo").innerText = "";
   document.getElementById("photo-image").style.display = "none";
 
-  currentStep = -1; // So NEXT starts at Dirty-water
+  // Remove hotspot highlight
+  viewer.querySelectorAll(".Hotspot").forEach(h => h.classList.remove("active"));
+
+  currentStep = -1; // NEXT starts at Dirty-water
 };
 
 document.getElementById("tour-next").onclick = () => {

@@ -15,6 +15,9 @@
 
 <body>
 
+<!-- SIDEBAR TOGGLE (TOP LEFT) -->
+<button id="sidebar-toggle">☰</button>
+
 <!-- BRANDING BAR -->
 <div id="branding-bar">
   <img id="branding-logo" src="client-logo.png" alt="Client Logo">
@@ -23,7 +26,6 @@
 
 <!-- SIDEBAR -->
 <div id="tour-sidebar" class="collapsed">
-  <button id="sidebar-toggle">☰</button>
 
   <h2 id="tour-title">CSO Tour</h2>
 
@@ -36,14 +38,15 @@
   <h3>Hotspot</h3>
   <p id="hotspot-name">Select a hotspot</p>
 
-  <h3>Child-Friendly Explanation</h3>
+  <h3>More information</h3>
   <p id="hotspot-explanation">Click a hotspot to learn more.</p>
 
-  <h3>Photo Requirements</h3>
+  <h3>Photo</h3>
   <p id="hotspot-photo">Click a hotspot to see photo instructions.</p>
-</div>
 
+  <!-- IMAGE PREVIEW -->
   <img id="photo-image" src="" alt="Hotspot Photo">
+</div>
 
 <!-- FLOATING HOTSPOT LIST -->
 <div id="hotspot-list"></div>
@@ -61,8 +64,7 @@
   environment-image="pillars_1k.hdr"
   skybox-image="pillars_1k.hdr"
   shadow-intensity="1"
-  tone-mapping="neutral"
-  auto-rotate>
+  tone-mapping="neutral">
 
   <!-- 12 HOTSPOTS -->
   <button class="Hotspot" slot="hotspot-1"

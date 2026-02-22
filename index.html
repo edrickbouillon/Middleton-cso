@@ -8,17 +8,12 @@
   <link rel="stylesheet" href="styles.css">
 
   <!-- Model Viewer -->
-  <model-viewer
-  id="viewer"
-  src="Middleton CSO 05.glb"
-  camera-controls
-  ar
-  ar-modes="scene-viewer webxr quick-look"
-  ar-scale="auto"
-  environment-image="pillars_1k.hdr"
-  skybox-image="pillars_1k.hdr"
-  shadow-intensity="1"
-  tone-mapping="neutral">
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js">
+  </script>
+</head>
+
+<body>
 
 <!-- SIDEBAR TOGGLE (TOP LEFT) -->
 <button id="sidebar-toggle">☰</button>

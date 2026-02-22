@@ -47,7 +47,7 @@ html, body {
   position: fixed;
   top: 60px;
   left: 0;
-  width: 280px;
+  width: 300px;
   height: calc(100vh - 60px);
   background: rgba(15, 15, 15, 0.96);
   color: white;
@@ -59,7 +59,7 @@ html, body {
 }
 
 #tour-sidebar.collapsed {
-  transform: translateX(-240px);
+  transform: translateX(-260px);
 }
 
 #sidebar-toggle {
@@ -90,6 +90,14 @@ html, body {
   margin-bottom: 6px;
   font-size: 16px;
   color: #3a7afe;
+}
+
+#photo-image {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: none; /* hidden until a hotspot is selected */
 }
 
 /* ============================
@@ -185,6 +193,17 @@ model-viewer {
   font-size: 12px;
   white-space: nowrap;
   pointer-events: none;
+}
+
+.Hotspot.active {
+  box-shadow: 0 0 15px 6px rgba(58,122,254,0.9);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); box-shadow: 0 0 10px rgba(58,122,254,0.6); }
+  50% { transform: scale(1.15); box-shadow: 0 0 20px rgba(58,122,254,1); }
+  100% { transform: scale(1); box-shadow: 0 0 10px rgba(58,122,254,0.6); }
 }
 
 /* ============================

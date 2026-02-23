@@ -37,7 +37,7 @@ const hotspotData = [
     name: "Dirty-water",
     explanation:
       "This is the mucky water that comes from toilets, sinks and rain washing along the streets. All that yucky stuff travels through pipes to get cleaned.",
-    photo: "Take a photo showing the inlet where the dirty water first arrives.",
+    photo: "Photo showing the inlet where the dirty water first arrives.",
     fov: 22,
     dist: 4,
     rotate: Math.PI / 2
@@ -46,7 +46,7 @@ const hotspotData = [
     name: "Cleaned-water",
     explanation:
       "This water has had the big bits and rubbish taken out of it. It’s not drinking water, but it’s much cleaner than before.",
-    photo: "Capture the area where the cleaned water flows out.",
+    photo: "Area where the cleaned water flows out.",
     fov: 25,
     dist: 2,
     rotate: 0
@@ -55,7 +55,7 @@ const hotspotData = [
     name: "Tank Inlet",
     explanation:
       "This is the doorway where the screened dirty water goes into the big underground tank to wait its turn.",
-    photo: "Photograph the inlet pipe leading into the tank.",
+    photo: "Photo of the inlet pipe leading into the tank.",
     fov: 25,
     dist: 2,
     rotate: Math.PI
@@ -64,7 +64,7 @@ const hotspotData = [
     name: "Underground Tank",
     explanation:
       "This giant hidden tank is like a holding pen underground. It keeps extra dirty water safe during heavy rain so the system doesn’t get overwhelmed.",
-    photo: "Take a photo showing the tank access area.",
+    photo: "Photo showing the tank access area.",
     fov: 30,
     dist: 4,
     rotate: Math.PI
@@ -73,7 +73,7 @@ const hotspotData = [
     name: "Pumps",
     explanation:
       "These powerful machines push the dirty water back into the system when there’s space again. Think of them like big water-moving muscles!",
-    photo: "Photograph the pump housings or pump access covers.",
+    photo: "Photo of the pump.",
     fov: 20,
     dist: 1,
     rotate: Math.PI
@@ -82,7 +82,7 @@ const hotspotData = [
     name: "Taps",
     explanation:
       "These are special valves that can turn the water flow on or off for the pumps. Like a tap at home, but much bigger and much stronger.",
-    photo: "Capture the valve handles or tap mechanisms.",
+    photo: "The valve handles and tap mechanisms.",
     fov: 22,
     dist: 1,
     rotate: Math.PI
@@ -91,7 +91,7 @@ const hotspotData = [
     name: "Return-water",
     explanation:
       "This is where the pumped water goes back into the main sewer system to continue its journey.",
-    photo: "Take a photo of the return pipework.",
+    photo: "Photo of the return pipework.",
     fov: 28,
     dist: 3,
     rotate: Math.PI / 2
@@ -100,7 +100,7 @@ const hotspotData = [
     name: "Send to water cleaner",
     explanation:
       "This pipe sends the dirty water to the sewage treatment works where it gets properly cleaned before being released safely.",
-    photo: "Photograph the outgoing pipe to the treatment works.",
+    photo: "Photograph of the outgoing pipe to the treatment works.",
     fov: 25,
     dist: 5,
     rotate: 0
@@ -109,7 +109,7 @@ const hotspotData = [
     name: "Power",
     explanation:
       "This is the Motor Control Centre — the brain box of the site. It tells the pumps and equipment when to switch on and off.",
-    photo: "Capture the MCC cabinet or electrical control area.",
+    photo: "The MCC cabinet or electrical control area.",
     fov: 30,
     dist: 1,
     rotate: Math.PI / 2
@@ -118,7 +118,7 @@ const hotspotData = [
     name: "River",
     explanation:
       "This is the nearby river. After water is properly treated and safe, it eventually returns here.",
-    photo: "Take a photo showing the river outfall direction.",
+    photo: "Photo showing the river outfall direction.",
     fov: 35,
     dist: 4,
     rotate: -Math.PI / 2
@@ -127,7 +127,7 @@ const hotspotData = [
     name: "Emergency overflow",
     explanation:
       "If there’s too much water during a huge storm, this is the safety release point to stop flooding. It’s only used in emergencies.",
-    photo: "Photograph the overflow structure.",
+    photo: "Overflow Photo .",
     fov: 35,
     dist: 1,
     rotate: -Math.PI / 2
@@ -136,7 +136,7 @@ const hotspotData = [
     name: "Johnny",
     explanation:
       "This is Johnny! He’s here to show how big everything is. Standing next to the valve chamber helps you see the true size of the site.",
-    photo: "Take a fun photo of Johnny next to the equipment.",
+    photo: "More about Johnny next to the equipment.",
     fov: 20,
     dist: 1,
     rotate: Math.PI

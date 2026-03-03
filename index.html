@@ -17,11 +17,9 @@
 
 <!-- TOP BRANDING BAR -->
 <div id="branding-bar">
+  <button id="menu-button">≣</button>
   <img id="branding-logo" src="client-logo.png" alt="Client Logo">
   <span id="branding-title">Interactive 3D Tour</span>
-
-  <!-- MENU BUTTON -->
-  <button id="menu-button">≣</button>
 </div>
 
 <!-- SLIDE-DOWN MENU -->
@@ -29,95 +27,21 @@
   <p class="menu-item">AR ACTIVE</p>
 </div>
 
-<!-- RIGHT-HAND ICON BAR -->
+<!-- RIGHT-HAND TEXT BUTTON TOUR -->
 <div id="icon-bar">
 
-  <!-- CSO SITE VIEW -->
-  <button class="icon-btn" data-target="site">
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="8" stroke="white" stroke-width="2" fill="none"/>
-    </svg>
-    <span class="icon-label">CSO Site</span>
-  </button>
-
-  <!-- HOTSPOT ICONS -->
-  <button class="icon-btn" data-target="1">
-    <svg viewBox="0 0 24 24">
-      <rect x="5" y="10" width="14" height="4" fill="white"/>
-    </svg>
-    <span class="icon-label">Wastewater</span>
-  </button>
-
-  <button class="icon-btn" data-target="2">
-    <svg viewBox="0 0 24 24">
-      <polygon points="4,12 20,6 20,18" fill="white"/>
-    </svg>
-    <span class="icon-label">Spill to storm tank</span>
-  </button>
-
-  <button class="icon-btn" data-target="3">
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="5" fill="white"/>
-    </svg>
-    <span class="icon-label">Tank inlet</span>
-  </button>
-
-  <button class="icon-btn" data-target="4">
-    <svg viewBox="0 0 24 24">
-      <rect x="6" y="6" width="12" height="12" fill="white"/>
-    </svg>
-    <span class="icon-label">Underground storage tank</span>
-  </button>
-
-  <button class="icon-btn" data-target="5">
-    <svg viewBox="0 0 24 24">
-      <path d="M12 4 L12 20 M8 12 L16 12" stroke="white" stroke-width="2"/>
-    </svg>
-    <span class="icon-label">Pumps</span>
-  </button>
-
-  <button class="icon-btn" data-target="6">
-    <svg viewBox="0 0 24 24">
-      <path d="M6 12 L18 12 M12 6 L12 18" stroke="white" stroke-width="2"/>
-    </svg>
-    <span class="icon-label">Taps</span>
-  </button>
-
-  <button class="icon-btn" data-target="7">
-    <svg viewBox="0 0 24 24">
-      <polyline points="4,12 10,6 14,18 20,12" stroke="white" stroke-width="2" fill="none"/>
-    </svg>
-    <span class="icon-label">Return water</span>
-  </button>
-
-  <button class="icon-btn" data-target="8">
-    <svg viewBox="0 0 24 24">
-      <path d="M4 12 H20 M12 4 V20" stroke="white" stroke-width="2"/>
-    </svg>
-    <span class="icon-label">Treatment works</span>
-  </button>
-
-  <button class="icon-btn" data-target="9">
-    <svg viewBox="0 0 24 24">
-      <polygon points="12,4 15,10 21,10 16,14 18,20 12,16 6,20 8,14 3,10 9,10" fill="white"/>
-    </svg>
-    <span class="icon-label">Power supply</span>
-  </button>
-
-  <button class="icon-btn" data-target="10">
-    <svg viewBox="0 0 24 24">
-      <path d="M4 4 L20 20 M20 4 L4 20" stroke="white" stroke-width="2"/>
-    </svg>
-    <span class="icon-label">Overflow</span>
-  </button>
-
-  <button class="icon-btn" data-target="11">
-    <svg viewBox="0 0 24 24">
-      <circle cx="12" cy="8" r="3" fill="white"/>
-      <rect x="9" y="11" width="6" height="9" fill="white"/>
-    </svg>
-    <span class="icon-label">Engineer</span>
-  </button>
+  <button class="icon-btn" data-target="site">CSO Site</button>
+  <button class="icon-btn" data-target="1">Wastewater</button>
+  <button class="icon-btn" data-target="2">Spill to storm tank</button>
+  <button class="icon-btn" data-target="3">Tank inlet</button>
+  <button class="icon-btn" data-target="4">Underground storage tank</button>
+  <button class="icon-btn" data-target="5">Pumps</button>
+  <button class="icon-btn" data-target="6">Taps</button>
+  <button class="icon-btn" data-target="7">Return water</button>
+  <button class="icon-btn" data-target="8">Treatment works</button>
+  <button class="icon-btn" data-target="9">Power supply</button>
+  <button class="icon-btn" data-target="10">Overflow</button>
+  <button class="icon-btn" data-target="11">Engineer</button>
 
 </div>
 
@@ -134,86 +58,77 @@
   ar-scale="fixed"
   ar-placement="floor"
   scale="0.02 0.02 0.02"
-  environment-image="pillars_1k.hdr"
-  skybox-image="pillars_1k.hdr"
   shadow-intensity="1"
-  tone-mapping="neutral">
+  tone-mapping="neutral"
+  exposure="1"
+  disable-pan
+  disable-tap
+>
 
-  <!-- HOTSPOTS (unchanged from your latest export) -->
+  <!-- HOTSPOTS (RENAMED + RENUMBERED) -->
   <button class="Hotspot" slot="hotspot-1"
     data-position="-46.31893321217518m 9.458862646186729m -16.947827835773218m"
-    data-normal="-0.6373115737733133m 0.5548665190597024m -0.5347495712585019m"
-    data-visibility-attribute="visible">
+    data-normal="-0.6373115737733133m 0.5548665190597024m -0.5347495712585019m">
       <div class="HotspotAnnotation">Wastewater</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-2"
     data-position="-33.435490361278895m 11.118663582498588m -23.969934160624458m"
-    data-normal="-0.46853663804443024m 1.4602674121240587e-15m -0.8834440665995911m"
-    data-visibility-attribute="visible">
+    data-normal="-0.46853663804443024m 1.4602674121240587e-15m -0.8834440665995911m">
       <div class="HotspotAnnotation">Spill to storm tank</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-3"
     data-position="-19.0675709395093m 10.737494542218105m -14.103194478730433m"
-    data-normal="0.42266693204196065m 0.000003881607057355133m 0.9062850901030921m"
-    data-visibility-attribute="visible">
+    data-normal="0.42266693204196065m 0.000003881607057355133m 0.9062850901030921m">
       <div class="HotspotAnnotation">Tank inlet</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-4"
     data-position="-16.57981622940034m 3.491531152947519m -9.891652321211414m"
-    data-normal="-3.4557551666113365e-16m 1m -2.7891403810516714e-16m"
-    data-visibility-attribute="visible">
+    data-normal="-3.4557551666113365e-16m 1m -2.7891403810516714e-16m">
       <div class="HotspotAnnotation">Underground storage tank</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-5"
     data-position="-21.179182282780225m 3.1961747300631744m -7.70057518127105m"
-    data-normal="0.3772540097598416m 0.4472136835507855m 0.8109743111622338m"
-    data-visibility-attribute="visible">
+    data-normal="0.3772540097598416m 0.4472136835507855m 0.8109743111622338m">
       <div class="HotspotAnnotation">Pumps</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-6"
     data-position="-27.281981608117846m 12.284016153541817m -4.880074435605172m"
-    data-normal="0.4217828260646342m 2.3849398690408927e-7m 0.9066968885117418m"
-    data-visibility-attribute="visible">
+    data-normal="0.4217828260646342m 2.3849398690408927e-7m 0.9066968885117418m">
       <div class="HotspotAnnotation">Taps</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-7"
     data-position="-44.179459737314986m 11.635006728184575m -17.77565763945174m"
-    data-normal="0.6812237879956632m -1.3708925279101793e-15m 0.7320752356614993m"
-    data-visibility-attribute="visible">
+    data-normal="0.6812237879956632m -1.3708925279101793e-15m 0.7320752356614993m">
       <div class="HotspotAnnotation">Return water</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-8"
     data-position="-22.38340534564503m 8.94654207351823m -30.66650682295832m"
-    data-normal="-0.4598137472853396m 0.16477901984791027m -0.8725933717519151m"
-    data-visibility-attribute="visible">
+    data-normal="-0.4598137472853396m 0.16477901984791027m -0.8725933717519151m">
       <div class="HotspotAnnotation">Treatment works</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-9"
     data-position="-5.421687813974798m 14.749722484546155m -6.913118326844746m"
-    data-normal="0.43718346110556283m 3.1988762041086473e-16m 0.8993723485496766m"
-    data-visibility-attribute="visible">
+    data-normal="0.43718346110556283m 3.1988762041086473e-16m 0.8993723485496766m">
       <div class="HotspotAnnotation">Power supply</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-10"
     data-position="-14.890668307790538m 10.736173845503009m -39.284940426003146m"
-    data-normal="-0.7986424127518088m -0.198363957382188m -0.5681743015709592m"
-    data-visibility-attribute="visible">
+    data-normal="-0.7986424127518088m -0.198363957382188m -0.5681743015709592m">
       <div class="HotspotAnnotation">Overflow</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-11"
     data-position="-28.010850112819504m 12.45037162808081m -7.081012647661171m"
-    data-normal="-0.005400309672074667m 0.9999299957235289m -0.010528072368158274m"
-    data-visibility-attribute="visible">
+    data-normal="-0.005400309672074667m 0.9999299957235289m -0.010528072368158274m">
       <div class="HotspotAnnotation">Engineer</div>
   </button>
 
@@ -223,6 +138,9 @@
   </div>
 
 </model-viewer>
+
+<!-- AR BUTTON -->
+<button id="ar-button">Enter AR</button>
 
 <script src="script.js"></script>
 </body>

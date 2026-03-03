@@ -26,12 +26,12 @@ const hotspotInfo = {
 };
 
 /* ============================================================
-   CAMERA OFFSETS
+   CAMERA OFFSETS (YOUR EXACT TABLE)
    ============================================================ */
 const cameraOffsets = {
-  1:  Math.PI / 2,   // 90° anti-clockwise
+  1:  Math.PI / 2,
   2:  0,
-  3: -Math.PI,       // 180° clockwise
+  3: -Math.PI,
   4: -Math.PI,
   5: -Math.PI,
   6: -Math.PI,
@@ -44,19 +44,19 @@ const cameraOffsets = {
 
 const cameraRadius = {
   1: 3,
-  2: 1,   
+  2: 1,
   3: 3,
   4: 3,
-  5: 1,   
-  6: 1,   
+  5: 1,
+  6: 1,
   7: 3,
   8: 3,
   9: 3,
   10: 3,
-  11: 1   
+  11: 1
 };
 
-const PHI = 0.349; // 20° in radians
+const PHI = 1.22173; // 70° in radians
 
 /* ============================================================
    FLOATING BUBBLE
@@ -67,16 +67,14 @@ function showBubble(text, position) {
   bubble.innerText = text;
   bubble.classList.remove("hidden");
 
-  const worldPos = position.split(" ").map(v => parseFloat(v));
-  const offsetY = worldPos[1] - 0.5;
+  const [x, y, z] = position.split(" ").map(parseFloat);
+  const offset = { x, y: y - 0.5, z };
 
-  const screenPos = viewer.positionAndNormalFromPoint(
-    { x: worldPos[0], y: offsetY, z: worldPos[2] }
-  );
+  const screen = viewer.positionAndNormalFromPoint(offset);
 
-  if (screenPos) {
-    bubble.style.left = `${screenPos.position.x}px`;
-    bubble.style.top = `${screenPos.position.y}px`;
+  if (screen && screen.position) {
+    bubble.style.left = `${screen.position.x}px`;
+    bubble.style.top = `${screen.position.y}px`;
   }
 }
 
@@ -95,7 +93,7 @@ function moveCameraToHotspot(hotspotEl, id) {
 
   const radius = cameraRadius[id];
 
-  viewer.cameraOrbit = `${theta}rad ${PHI}rad ${radius}m`;
+  viewer.cameraOrbit = `${theta}rad ${PHI_HOTSPOT}rad ${radius}m`;
   viewer.cameraTarget = `${x}m ${y}m ${z}m`;
 }
 
@@ -130,7 +128,7 @@ document.querySelectorAll(".menu-item").forEach(btn => {
       const tankInlet = viewer.querySelector('[slot="hotspot-3"]');
       const [x, y, z] = tankInlet.dataset.position.split(" ").map(parseFloat);
 
-      viewer.cameraOrbit = `0rad ${PHI}rad 40m`;
+      viewer.cameraOrbit = `0rad ${PHI_SITE}rad 40m`;
       viewer.cameraTarget = `${x}m ${y}m ${z}m`;
 
       hideBubble();

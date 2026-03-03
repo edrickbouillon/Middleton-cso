@@ -15,43 +15,114 @@
 
 <body>
 
-<!-- SIDEBAR TOGGLE -->
-<button id="sidebar-toggle">☰</button>
-
-<!-- BRANDING BAR -->
+<!-- TOP BRANDING BAR -->
 <div id="branding-bar">
   <img id="branding-logo" src="client-logo.png" alt="Client Logo">
   <span id="branding-title">Interactive 3D Tour</span>
+
+  <!-- MENU BUTTON -->
+  <button id="menu-button">≣</button>
 </div>
 
-<!-- SIDEBAR -->
-<div id="tour-sidebar" class="collapsed">
-
-  <h2 id="tour-title">CSO Tour</h2>
-
-  <div id="tour-controls">
-    <button id="tour-start" class="tour-btn">Start</button>
-    <button id="tour-prev" class="tour-btn">Previous</button>
-    <button id="tour-next" class="tour-btn">Next</button>
-  </div>
-
-  <h3>Hotspot</h3>
-  <p id="hotspot-name">Select a hotspot</p>
-
-  <h3>More information</h3>
-  <p id="hotspot-explanation">Click a hotspot to learn more.</p>
-
-  <h3>Photo</h3>
-  <p id="hotspot-photo">Click a hotspot to see photo instructions.</p>
-
-  <img id="photo-image" src="" alt="Hotspot Photo">
+<!-- SLIDE-DOWN MENU -->
+<div id="menu-panel" class="hidden">
+  <p class="menu-item">AR ACTIVE</p>
 </div>
 
-<!-- FLOATING HOTSPOT LIST -->
-<div id="hotspot-list"></div>
+<!-- RIGHT-HAND ICON BAR -->
+<div id="icon-bar">
 
-<!-- AR BUTTON -->
-<button id="ar-button">Enter AR</button>
+  <!-- CSO SITE VIEW -->
+  <button class="icon-btn" data-target="site">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8" stroke="white" stroke-width="2" fill="none"/>
+    </svg>
+    <span class="icon-label">CSO Site</span>
+  </button>
+
+  <!-- HOTSPOT ICONS -->
+  <button class="icon-btn" data-target="1">
+    <svg viewBox="0 0 24 24">
+      <rect x="5" y="10" width="14" height="4" fill="white"/>
+    </svg>
+    <span class="icon-label">Wastewater</span>
+  </button>
+
+  <button class="icon-btn" data-target="2">
+    <svg viewBox="0 0 24 24">
+      <polygon points="4,12 20,6 20,18" fill="white"/>
+    </svg>
+    <span class="icon-label">Spill to storm tank</span>
+  </button>
+
+  <button class="icon-btn" data-target="3">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5" fill="white"/>
+    </svg>
+    <span class="icon-label">Tank inlet</span>
+  </button>
+
+  <button class="icon-btn" data-target="4">
+    <svg viewBox="0 0 24 24">
+      <rect x="6" y="6" width="12" height="12" fill="white"/>
+    </svg>
+    <span class="icon-label">Underground storage tank</span>
+  </button>
+
+  <button class="icon-btn" data-target="5">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 4 L12 20 M8 12 L16 12" stroke="white" stroke-width="2"/>
+    </svg>
+    <span class="icon-label">Pumps</span>
+  </button>
+
+  <button class="icon-btn" data-target="6">
+    <svg viewBox="0 0 24 24">
+      <path d="M6 12 L18 12 M12 6 L12 18" stroke="white" stroke-width="2"/>
+    </svg>
+    <span class="icon-label">Taps</span>
+  </button>
+
+  <button class="icon-btn" data-target="7">
+    <svg viewBox="0 0 24 24">
+      <polyline points="4,12 10,6 14,18 20,12" stroke="white" stroke-width="2" fill="none"/>
+    </svg>
+    <span class="icon-label">Return water</span>
+  </button>
+
+  <button class="icon-btn" data-target="8">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 12 H20 M12 4 V20" stroke="white" stroke-width="2"/>
+    </svg>
+    <span class="icon-label">Treatment works</span>
+  </button>
+
+  <button class="icon-btn" data-target="9">
+    <svg viewBox="0 0 24 24">
+      <polygon points="12,4 15,10 21,10 16,14 18,20 12,16 6,20 8,14 3,10 9,10" fill="white"/>
+    </svg>
+    <span class="icon-label">Power supply</span>
+  </button>
+
+  <button class="icon-btn" data-target="10">
+    <svg viewBox="0 0 24 24">
+      <path d="M4 4 L20 20 M20 4 L4 20" stroke="white" stroke-width="2"/>
+    </svg>
+    <span class="icon-label">Overflow</span>
+  </button>
+
+  <button class="icon-btn" data-target="11">
+    <svg viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="3" fill="white"/>
+      <rect x="9" y="11" width="6" height="9" fill="white"/>
+    </svg>
+    <span class="icon-label">Engineer</span>
+  </button>
+
+</div>
+
+<!-- FLOATING EXPLANATION BUBBLE -->
+<div id="floating-bubble" class="hidden"></div>
 
 <!-- MODEL VIEWER -->
 <model-viewer
@@ -68,7 +139,7 @@
   shadow-intensity="1"
   tone-mapping="neutral">
 
-  <!-- UPDATED HOTSPOTS -->
+  <!-- HOTSPOTS (unchanged from your latest export) -->
   <button class="Hotspot" slot="hotspot-1"
     data-position="-46.31893321217518m 9.458862646186729m -16.947827835773218m"
     data-normal="-0.6373115737733133m 0.5548665190597024m -0.5347495712585019m"

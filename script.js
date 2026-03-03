@@ -1,6 +1,6 @@
-/* ============================
+/* ============================================================
    MODEL VIEWER + PROGRESS BAR
-   ============================ */
+   ============================================================ */
 const viewer = document.getElementById("viewer");
 
 viewer.addEventListener("progress", (e) => {
@@ -8,274 +8,150 @@ viewer.addEventListener("progress", (e) => {
   bar.style.width = `${e.detail.totalProgress * 100}%`;
 });
 
-/* ============================
-   CAMERA ANIMATION
-   ============================ */
-function animateCamera(targetOrbit, targetFov, targetTarget) {
-  viewer.cameraOrbit = `${targetOrbit.theta}rad ${targetOrbit.phi}rad ${targetOrbit.radius}m`;
-  viewer.fieldOfView = `${targetFov}deg`;
-  viewer.cameraTarget = `${targetTarget.x}m ${targetTarget.y}m ${targetTarget.z}m`;
-}
-
-/* ============================
-   START VIEW (FULL MODEL)
-   ============================ */
-const startView = {
-  name: "Collective Dirty Water Overflow",
-  explanation:
-    "This is the whole CSO system working together. All the dirty water from homes, streets and rainstorms comes here to be safely managed. Press NEXT and I’ll show you each part step by step!",
-  photo: "",
-  fov: 65,
-  dist: 120
+/* ============================================================
+   HOTSPOT DEFINITIONS (MATCHING NEW CLIENT TEXT)
+   ============================================================ */
+const hotspotInfo = {
+  1: {
+    name: "Wastewater",
+    text: "Wastewater from the sewer network travels down this pipe before entering the storm tank."
+  },
+  2: {
+    name: "Spill to storm tank",
+    text: "When the sewer fills up during heavy rain, wastewater mixes with rainwater and causes the water level to rise. Once it reaches this higher pipe, the excess flow is screened to remove debris before being carried to the storage tank."
+  },
+  3: {
+    name: "Tank inlet",
+    text: "This is where stormwater enters the storage tank during heavy rain. Most of the time it stays dry, but when the system becomes full, extra stormwater flows in here to stop the sewer network from overflowing."
+  },
+  4: {
+    name: "Underground storage tank",
+    text: "This tank stores extra stormwater underground until the sewers have space for it again."
+  },
+  5: {
+    name: "Pumps",
+    text: "The pumps move any remaining stormwater out of the storage tank and send it back to the treatment works to be cleaned once the heavy rain has passed."
+  },
+  6: {
+    name: "Taps",
+    text: "The taps act like a one-way system to let water flow out of the storage tank but close if it tries to flow back the wrong way."
+  },
+  7: {
+    name: "Return water",
+    text: "Once the heavy rain has passed, this pipe carries the stormwater that’s been emptied from the storage tank back into the sewer network."
+  },
+  8: {
+    name: "Treatment works",
+    text: "This pipe carries wastewater to the treatment works where it is cleaned."
+  },
+  9: {
+    name: "Power supply",
+    text: "This provides the electricity needed to power the pumps and the screen so the tanks can work properly during and after heavy rain."
+  },
+  10: {
+    name: "Overflow",
+    text: "The overflow is only used when both the storm tank and storage tank are completely full. Extra stormwater is screened before being released into the river."
+  },
+  11: {
+    name: "Engineer",
+    text: "The engineer works hard, checking the tank and equipment to make sure everything is working properly."
+  }
 };
 
-/* ============================
-   HOTSPOT DATA (12 ITEMS)
-   ============================ */
-const hotspotData = [
-  {
-    name: "Dirty-water",
-    explanation:
-      "This is the mucky water that comes from toilets, sinks and rain washing along the streets. All that yucky stuff travels through pipes to get cleaned.",
-    photo: "Photo showing the inlet where the dirty water first arrives.",
-    fov: 22,
-    dist: 4,
-    rotate: Math.PI / 2
-  },
-  {
-    name: "Cleaned-water",
-    explanation:
-      "This water has had the big bits and rubbish taken out of it. It’s not drinking water, but it’s much cleaner than before.",
-    photo: "Area where the cleaned water flows out.",
-    fov: 25,
-    dist: 2,
-    rotate: 0
-  },
-  {
-    name: "Tank Inlet",
-    explanation:
-      "This is the doorway where the screened dirty water goes into the big underground tank to wait its turn.",
-    photo: "Photo of the inlet pipe leading into the tank.",
-    fov: 25,
-    dist: 2,
-    rotate: Math.PI
-  },
-  {
-    name: "Underground Tank",
-    explanation:
-      "This giant hidden tank is like a holding pen underground. It keeps extra dirty water safe during heavy rain so the system doesn’t get overwhelmed.",
-    photo: "Photo showing the tank access area.",
-    fov: 30,
-    dist: 4,
-    rotate: Math.PI
-  },
-  {
-    name: "Pumps",
-    explanation:
-      "These powerful machines push the dirty water back into the system when there’s space again. Think of them like big water-moving muscles!",
-    photo: "Photo of the pump.",
-    fov: 20,
-    dist: 1,
-    rotate: Math.PI
-  },
-  {
-    name: "Taps",
-    explanation:
-      "These are special valves that can turn the water flow on or off for the pumps. Like a tap at home, but much bigger and much stronger.",
-    photo: "The valve handles and tap mechanisms.",
-    fov: 22,
-    dist: 1,
-    rotate: Math.PI
-  },
-  {
-    name: "Return-water",
-    explanation:
-      "This is where the pumped water goes back into the main sewer system to continue its journey.",
-    photo: "Photo of the return pipework.",
-    fov: 28,
-    dist: 3,
-    rotate: Math.PI / 2
-  },
-  {
-    name: "Send to water cleaner",
-    explanation:
-      "This pipe sends the dirty water to the sewage treatment works where it gets properly cleaned before being released safely.",
-    photo: "Photograph of the outgoing pipe to the treatment works.",
-    fov: 25,
-    dist: 5,
-    rotate: 0
-  },
-  {
-    name: "Power",
-    explanation:
-      "This is the Motor Control Centre — the brain box of the site. It tells the pumps and equipment when to switch on and off.",
-    photo: "The MCC cabinet or electrical control area.",
-    fov: 30,
-    dist: 1,
-    rotate: Math.PI / 2
-  },
-  {
-    name: "River",
-    explanation:
-      "This is the nearby river. After water is properly treated and safe, it eventually returns here.",
-    photo: "Photo showing the river outfall direction.",
-    fov: 35,
-    dist: 4,
-    rotate: -Math.PI / 2
-  },
-  {
-    name: "Emergency overflow",
-    explanation:
-      "If there’s too much water during a huge storm, this is the safety release point to stop flooding. It’s only used in emergencies.",
-    photo: "Overflow Photo .",
-    fov: 35,
-    dist: 1,
-    rotate: -Math.PI / 2
-  },
-  {
-    name: "Johnny",
-    explanation:
-      "This is Johnny! He’s here to show how big everything is. Standing next to the valve chamber helps you see the true size of the site.",
-    photo: "More about Johnny next to the equipment.",
-    fov: 20,
-    dist: 1,
-    rotate: Math.PI
+/* ============================================================
+   FLOATING BUBBLE
+   ============================================================ */
+const bubble = document.getElementById("floating-bubble");
+
+function showBubble(text, position) {
+  bubble.innerText = text;
+  bubble.classList.remove("hidden");
+
+  // Convert 3D position to screen position
+  const worldPos = position.split(" ").map(v => parseFloat(v));
+  const offsetY = worldPos[1] - 0.5; // 0.5m below hotspot
+
+  const screenPos = viewer.positionAndNormalFromPoint(
+    {x: worldPos[0], y: offsetY, z: worldPos[2]}
+  );
+
+  if (screenPos) {
+    bubble.style.left = `${screenPos.position.x}px`;
+    bubble.style.top = `${screenPos.position.y}px`;
   }
-];
+}
 
-/* ============================
-   TOUR LOGIC
-   ============================ */
-let currentStep = 0;
+function hideBubble() {
+  bubble.classList.add("hidden");
+}
 
-function goToStep(index) {
-  const step = hotspotData[index];
-  const hotspotEl = viewer.querySelector(`[slot="hotspot-${index + 1}"]`);
+/* ============================================================
+   CAMERA MOVEMENT
+   ============================================================ */
+function moveCameraToHotspot(hotspotEl) {
+  const [x, y, z] = hotspotEl.dataset.position.split(" ").map(parseFloat);
+
+  const theta = Math.atan2(z, x);
+  const phi = Math.PI / 4;
+  const radius = 12;
+
+  viewer.cameraOrbit = `${theta}rad ${phi}rad ${radius}m`;
+  viewer.cameraTarget = `${x}m ${y}m ${z}m`;
+}
+
+/* ============================================================
+   ACTIVATE HOTSPOT
+   ============================================================ */
+function activateHotspot(id) {
+  hideBubble();
+
+  // Hide all hotspot labels
+  viewer.querySelectorAll(".HotspotAnnotation").forEach(a => {
+    a.style.display = "none";
+  });
+
+  const hotspotEl = viewer.querySelector(`[slot="hotspot-${id}"]`);
   if (!hotspotEl) return;
 
-  // Remove highlight from all hotspots
-  viewer.querySelectorAll(".Hotspot").forEach(h => h.classList.remove("active"));
-  hotspotEl.classList.add("active");
+  // Show only active label
+  hotspotEl.querySelector(".HotspotAnnotation").style.display = "block";
 
-  // Extract hotspot coordinates
-  const [x, y, z] = hotspotEl.dataset.position
-    .split(" ")
-    .map(v => parseFloat(v));
+  // Move camera
+  moveCameraToHotspot(hotspotEl);
 
-  // Natural facing direction (theta)
-  let theta = Math.atan2(z, x);
-
-  // Apply your custom rotation offset
-  theta += step.rotate;
-
-  // Camera vertical angle (phi)
-  const phi = Math.PI / 4;
-
-  // Apply your custom radius
-  const radius = step.dist;
-
-  // Animate camera
-  animateCamera(
-    { theta, phi, radius },
-    step.fov,
-    { x, y, z }
-  );
-
-  // Sidebar text
-  document.getElementById("hotspot-name").innerText = step.name;
-  document.getElementById("hotspot-explanation").innerText = step.explanation;
-  document.getElementById("hotspot-photo").innerText = step.photo;
-
-  // Sidebar image (slug-safe)
-  const img = document.getElementById("photo-image");
-  const slug = step.name
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
-
-  img.src = `images/${slug}.webp`;
-  img.style.display = "block";
-
-  currentStep = index;
+  // Show bubble
+  showBubble(hotspotInfo[id].text, hotspotEl.dataset.position);
 }
 
-/* ============================
-   SIDEBAR BUTTONS
-   ============================ */
-document.getElementById("tour-start").onclick = () => {
-  const powerHotspot = viewer.querySelector(`[slot="hotspot-9"]`);
-  const sendHotspot = viewer.querySelector(`[slot="hotspot-8"]`);
+/* ============================================================
+   ICON BAR EVENTS
+   ============================================================ */
+document.querySelectorAll(".icon-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const target = btn.dataset.target;
 
-  const [px, py, pz] = powerHotspot.dataset.position.split(" ").map(parseFloat);
-  const [sx, sy, sz] = sendHotspot.dataset.position.split(" ").map(parseFloat);
+    if (target === "site") {
+      // Zoom-out view
+      viewer.cameraOrbit = `0deg 75deg auto`;
+      viewer.cameraTarget = `0m 0m 0m`;
+      hideBubble();
+      return;
+    }
 
-  // Compute Send-to-water-cleaner camera angle
-  const theta = Math.atan2(sz, sx);
-  const phi = Math.PI / 4;
-
-  animateCamera(
-    { theta, phi, radius: startView.dist },
-    startView.fov,
-    { x: px, y: py, z: pz }
-  );
-
-  // Sidebar
-  document.getElementById("hotspot-name").innerText = startView.name;
-  document.getElementById("hotspot-explanation").innerText = startView.explanation;
-  document.getElementById("hotspot-photo").innerText = "";
-  document.getElementById("photo-image").style.display = "none";
-
-  viewer.querySelectorAll(".Hotspot").forEach(h => h.classList.remove("active"));
-
-  currentStep = -1;
-};
-
-document.getElementById("tour-next").onclick = () => {
-  if (currentStep === -1) {
-    currentStep = 0; // Start at Dirty-water
-  } else {
-    currentStep = (currentStep + 1) % hotspotData.length;
-  }
-  goToStep(currentStep);
-};
-
-document.getElementById("tour-prev").onclick = () => {
-  currentStep = (currentStep - 1 + hotspotData.length) % hotspotData.length;
-  goToStep(currentStep);
-};
-
-/* ============================
-   HOTSPOT CLICK EVENTS
-   ============================ */
-viewer.querySelectorAll(".Hotspot").forEach((hs, i) => {
-  hs.onclick = () => goToStep(i);
+    activateHotspot(parseInt(target));
+  });
 });
 
-/* ============================
-   FLOATING HOTSPOT LIST
-   ============================ */
-const list = document.getElementById("hotspot-list");
-
-hotspotData.forEach((step, i) => {
-  const btn = document.createElement("button");
-  btn.className = "hotspot-list-item";
-  btn.innerText = step.name;
-  btn.onclick = () => goToStep(i);
-  list.appendChild(btn);
-});
-
-/* ============================
-   SIDEBAR COLLAPSE
-   ============================ */
-document.getElementById("sidebar-toggle").onclick = () => {
-  document.getElementById("tour-sidebar").classList.toggle("collapsed");
+/* ============================================================
+   MENU PANEL
+   ============================================================ */
+document.getElementById("menu-button").onclick = () => {
+  document.getElementById("menu-panel").classList.toggle("hidden");
 };
 
-/* ============================
+/* ============================================================
    AR BUTTON
-   ============================ */
+   ============================================================ */
 const arButton = document.getElementById("ar-button");
 
 arButton.addEventListener("click", () => {

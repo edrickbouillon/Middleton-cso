@@ -47,8 +47,7 @@ const cameraRadius = {
   11: 1
 };
 
-const PHI_HOTSPOT = 0.349;     // 20°
-const PHI_SITE = 1.22173;      // 70°
+const PHI = 1.22173; // 70° in radians
 
 const bubble = document.getElementById("floating-bubble");
 

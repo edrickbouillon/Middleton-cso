@@ -9,7 +9,7 @@ viewer.addEventListener("progress", (e) => {
 });
 
 /* ============================================================
-   HOTSPOT DEFINITIONS (MATCHING NEW CLIENT TEXT)
+   HOTSPOT DEFINITIONS (CLIENT TEXT)
    ============================================================ */
 const hotspotInfo = {
   1: {
@@ -67,12 +67,11 @@ function showBubble(text, position) {
   bubble.innerText = text;
   bubble.classList.remove("hidden");
 
-  // Convert 3D position to screen position
   const worldPos = position.split(" ").map(v => parseFloat(v));
   const offsetY = worldPos[1] - 0.5; // 0.5m below hotspot
 
   const screenPos = viewer.positionAndNormalFromPoint(
-    {x: worldPos[0], y: offsetY, z: worldPos[2]}
+    { x: worldPos[0], y: offsetY, z: worldPos[2] }
   );
 
   if (screenPos) {
@@ -93,7 +92,7 @@ function moveCameraToHotspot(hotspotEl) {
 
   const theta = Math.atan2(z, x);
   const phi = Math.PI / 4;
-  const radius = 12;
+  const radius = 3; // CLOSE-UP CAMERA
 
   viewer.cameraOrbit = `${theta}rad ${phi}rad ${radius}m`;
   viewer.cameraTarget = `${x}m ${y}m ${z}m`;
@@ -105,7 +104,6 @@ function moveCameraToHotspot(hotspotEl) {
 function activateHotspot(id) {
   hideBubble();
 
-  // Hide all hotspot labels
   viewer.querySelectorAll(".HotspotAnnotation").forEach(a => {
     a.style.display = "none";
   });
@@ -113,27 +111,23 @@ function activateHotspot(id) {
   const hotspotEl = viewer.querySelector(`[slot="hotspot-${id}"]`);
   if (!hotspotEl) return;
 
-  // Show only active label
   hotspotEl.querySelector(".HotspotAnnotation").style.display = "block";
 
-  // Move camera
   moveCameraToHotspot(hotspotEl);
 
-  // Show bubble
   showBubble(hotspotInfo[id].text, hotspotEl.dataset.position);
 }
 
 /* ============================================================
-   ICON BAR EVENTS
+   MENU PANEL (HOTSPOT LIST)
    ============================================================ */
-document.querySelectorAll(".icon-btn").forEach(btn => {
+document.querySelectorAll(".menu-item").forEach(btn => {
   btn.addEventListener("click", () => {
     const target = btn.dataset.target;
 
     if (target === "site") {
-      // Zoom-out view
-      viewer.cameraOrbit = `0deg 75deg auto`;
-      viewer.cameraTarget = `0m 0m 0m`;
+      viewer.cameraOrbit = `0deg 65deg 40m`;
+      viewer.cameraTarget = `0m 5m 0m`;
       hideBubble();
       return;
     }
@@ -143,7 +137,7 @@ document.querySelectorAll(".icon-btn").forEach(btn => {
 });
 
 /* ============================================================
-   MENU PANEL
+   MENU BUTTON (≣)
    ============================================================ */
 document.getElementById("menu-button").onclick = () => {
   document.getElementById("menu-panel").classList.toggle("hidden");

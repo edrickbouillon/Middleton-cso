@@ -24,7 +24,6 @@
 
 <!-- SLIDE-DOWN MENU (HOTSPOT LIST) -->
 <div id="menu-panel" class="hidden">
-
   <button class="menu-item" data-target="site">CSO Site</button>
   <button class="menu-item" data-target="1">Wastewater</button>
   <button class="menu-item" data-target="2">Spill to storm tank</button>
@@ -37,7 +36,6 @@
   <button class="menu-item" data-target="9">Power supply</button>
   <button class="menu-item" data-target="10">Overflow</button>
   <button class="menu-item" data-target="11">Engineer</button>
-
 </div>
 
 <!-- FLOATING EXPLANATION BUBBLE -->
@@ -48,6 +46,7 @@
   id="viewer"
   src="Middleton CSO 05.glb"
   camera-controls
+  camera-target="auto"
   ar
   ar-modes="webxr scene-viewer quick-look"
   ar-scale="fixed"
@@ -58,74 +57,62 @@
   background-color="#ffffff"
 >
 
-  <!-- HOTSPOTS (RENAMED + RENUMBERED) -->
+  <!-- HOTSPOTS -->
   <button class="Hotspot" slot="hotspot-1"
-    data-position="-46.31893321217518m 9.458862646186729m -16.947827835773218m"
-    data-normal="-0.6373115737733133m 0.5548665190597024m -0.5347495712585019m">
+    data-position="-46.31893321217518m 9.458862646186729m -16.947827835773218m">
       <div class="HotspotAnnotation">Wastewater</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-2"
-    data-position="-33.435490361278895m 11.118663582498588m -23.969934160624458m"
-    data-normal="-0.46853663804443024m 1.4602674121240587e-15m -0.8834440665995911m">
+    data-position="-33.435490361278895m 11.118663582498588m -23.969934160624458m">
       <div class="HotspotAnnotation">Spill to storm tank</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-3"
-    data-position="-19.0675709395093m 10.737494542218105m -14.103194478730433m"
-    data-normal="0.42266693204196065m 0.000003881607057355133m 0.9062850901030921m">
+    data-position="-19.0675709395093m 10.737494542218105m -14.103194478730433m">
       <div class="HotspotAnnotation">Tank inlet</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-4"
-    data-position="-16.57981622940034m 3.491531152947519m -9.891652321211414m"
-    data-normal="-3.4557551666113365e-16m 1m -2.7891403810516714e-16m">
+    data-position="-16.57981622940034m 3.491531152947519m -9.891652321211414m">
       <div class="HotspotAnnotation">Underground storage tank</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-5"
-    data-position="-21.179182282780225m 3.1961747300631744m -7.70057518127105m"
-    data-normal="0.3772540097598416m 0.4472136835507855m 0.8109743111622338m">
+    data-position="-21.179182282780225m 3.1961747300631744m -7.70057518127105m">
       <div class="HotspotAnnotation">Pumps</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-6"
-    data-position="-27.281981608117846m 12.284016153541817m -4.880074435605172m"
-    data-normal="0.4217828260646342m 2.3849398690408927e-7m 0.9066968885117418m">
+    data-position="-27.281981608117846m 12.284016153541817m -4.880074435605172m">
       <div class="HotspotAnnotation">Taps</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-7"
-    data-position="-44.179459737314986m 11.635006728184575m -17.77565763945174m"
-    data-normal="0.6812237879956632m -1.3708925279101793e-15m 0.7320752356614993m">
+    data-position="-44.179459737314986m 11.635006728184575m -17.77565763945174m">
       <div class="HotspotAnnotation">Return water</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-8"
-    data-position="-22.38340534564503m 8.94654207351823m -30.66650682295832m"
-    data-normal="-0.4598137472853396m 0.16477901984791027m -0.8725933717519151m">
+    data-position="-22.38340534564503m 8.94654207351823m -30.66650682295832m">
       <div class="HotspotAnnotation">Treatment works</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-9"
-    data-position="-5.421687813974798m 14.749722484546155m -6.913118326844746m"
-    data-normal="0.43718346110556283m 3.1988762041086473e-16m 0.8993723485496766m">
+    data-position="-5.421687813974798m 14.749722484546155m -6.913118326844746m">
       <div class="HotspotAnnotation">Power supply</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-10"
-    data-position="-14.890668307790538m 10.736173845503009m -39.284940426003146m"
-    data-normal="-0.7986424127518088m -0.198363957382188m -0.5681743015709592m">
+    data-position="-14.890668307790538m 10.736173845503009m -39.284940426003146m">
       <div class="HotspotAnnotation">Overflow</div>
   </button>
 
   <button class="Hotspot" slot="hotspot-11"
-    data-position="-28.010850112819504m 12.45037162808081m -7.081012647661171m"
-    data-normal="-0.005400309672074667m 0.9999299957235289m -0.010528072368158274m">
+    data-position="-28.010850112819504m 12.45037162808081m -7.081012647661171m">
       <div class="HotspotAnnotation">Engineer</div>
   </button>
 
-  <!-- PROGRESS BAR -->
   <div class="progress-bar" slot="progress-bar">
     <div class="update-bar"></div>
   </div>

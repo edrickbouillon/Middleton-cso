@@ -1,90 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>Interactive 3D Tour</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="style.css">
 
-<script type="module"
-src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js">
-</script>
+<script type="module" src="script.js"></script>
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 </head>
 
 <body>
 
-<div id="branding-bar">
-<button id="menu-button">≣</button>
-<img id="branding-logo" src="client-logo.png">
-<span id="branding-title">Interactive 3D Tour</span>
+<div class="topBar">
+    <div class="logo">COMPANY BRAND</div>
 </div>
 
-
-<div id="menu-panel" class="hidden">
-
-<button class="menu-item" data-target="site">CSO Site</button>
-
-<button class="menu-item" data-target="1">Wastewater</button>
-<button class="menu-item" data-target="2">Spill to storm tank</button>
-<button class="menu-item" data-target="3">Tank inlet</button>
-<button class="menu-item" data-target="4">Storage tank</button>
-<button class="menu-item" data-target="5">Pumps</button>
-<button class="menu-item" data-target="6">Taps</button>
-<button class="menu-item" data-target="7">Return water</button>
-<button class="menu-item" data-target="8">Treatment works</button>
-<button class="menu-item" data-target="9">Power supply</button>
-<button class="menu-item" data-target="10">Overflow</button>
-<button class="menu-item" data-target="11">Engineer</button>
-
-<button id="toggle-background" class="menu-toggle inactive">
-Special Effect
-</button>
-
-</div>
-
-
-<div id="hotspot-info" class="hidden"></div>
-
+<div class="viewerContainer">
 
 <model-viewer
-id="viewer"
-src="Middleton CSO 05.glb"
-camera-controls
-shadow-intensity="1"
-tone-mapping="neutral"
-exposure="1"
-background-color="#ffffff"
-ar
-ar-modes="webxr scene-viewer quick-look"
+    id="viewer"
+    src="model.glb"
+    camera-controls
+    auto-rotate
+    exposure="1"
+    shadow-intensity="1"
 >
 
-<button class="Hotspot" slot="hotspot-1" data-position="-46.3189m 9.4588m -16.9478m"></button>
-<button class="Hotspot" slot="hotspot-2" data-position="-33.4354m 11.1186m -23.9699m"></button>
-<button class="Hotspot" slot="hotspot-3" data-position="-19.0675m 10.7374m -14.1031m"></button>
-<button class="Hotspot" slot="hotspot-4" data-position="-16.5798m 3.4915m -9.8916m"></button>
-<button class="Hotspot" slot="hotspot-5" data-position="-21.1791m 3.1961m -7.7005m"></button>
-<button class="Hotspot" slot="hotspot-6" data-position="-27.2819m 12.2840m -4.8800m"></button>
-<button class="Hotspot" slot="hotspot-7" data-position="-44.1794m 11.6350m -17.7756m"></button>
-<button class="Hotspot" slot="hotspot-8" data-position="-22.3834m 8.9465m -30.6665m"></button>
-<button class="Hotspot" slot="hotspot-9" data-position="-5.4216m 14.7497m -6.9131m"></button>
-<button class="Hotspot" slot="hotspot-10" data-position="-14.8906m 10.7361m -39.2849m"></button>
-<button class="Hotspot" slot="hotspot-11" data-position="-28.0108m 12.4503m -7.0810m"></button>
+<button class="hotspot" slot="hotspot-1" data-id="1"
+data-position="0m 1.2m 0.5m"
+data-normal="0m 1m 0m"></button>
+
+<button class="hotspot" slot="hotspot-2" data-id="2"
+data-position="1m 1m 0.3m"
+data-normal="0m 1m 0m"></button>
+
+<button class="hotspot" slot="hotspot-3" data-id="3"
+data-position="-0.8m 1.1m -0.2m"
+data-normal="0m 1m 0m"></button>
 
 </model-viewer>
 
+<div id="hotspotInfo"></div>
 
-<div id="tour-controls">
-<button id="tour-start">Start Tour</button>
-<button id="tour-prev">Prev</button>
-<button id="tour-next">Next</button>
 </div>
 
-<button id="ar-button">Enter AR</button>
+<div class="menu">
 
-<script src="script.js"></script>
+<button class="menuItem" data-id="1">Engineer</button>
+<button class="menuItem" data-id="2">Equipment</button>
+<button class="menuItem" data-id="3">System</button>
+
+<button id="specialEffect">Special Effect</button>
+
+</div>
 
 </body>
 </html>

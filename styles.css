@@ -133,10 +133,10 @@ model-viewer {
   animation: pulse 1.8s infinite;
 }
 
-@keyframes infoPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(0,63,138,0.9); }
-  70%  { box-shadow: 0 0 18px 10px rgba(0,63,138,0); }
-  100% { box-shadow: 0 0 0 0 rgba(0,63,138,0); }
+@keyframes pulse {
+  0%   { transform: scale(1);   box-shadow: 0 0 0 0 rgba(255,255,255,.9); }
+  70%  { transform: scale(1.2); box-shadow: 0 0 0 14px rgba(255,255,255,0); }
+  100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(255,255,255,0); }
 }
 
 /* FIXED INFO BOX */
@@ -153,21 +153,33 @@ model-viewer {
   font-size: 14px;
   z-index: 300;
   box-shadow: 0 4px 12px rgba(0,0,0,.25);
+
+  /* NEW: subtle border */
+  border: 2px solid rgba(0,63,138,0.4);
+
+  /* NEW: fade-in animation */
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .35s ease, transform .35s ease;
 }
 
 #hotspot-info.hidden {
   display: none;
 }
 
-/* Glow when active */
+/* When visible */
 #hotspot-info.active {
+  opacity: 1;
+  transform: translateY(0);
+
+  /* NEW: dark blue glow */
   animation: infoPulse 2s infinite;
 }
 
 @keyframes infoPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.6); }
-  70%  { box-shadow: 0 0 12px 6px rgba(255,255,255,0); }
-  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+  0%   { box-shadow: 0 0 0 0 rgba(0,63,138,0.6); }
+  70%  { box-shadow: 0 0 14px 8px rgba(0,63,138,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,63,138,0); }
 }
 
 /* TOUR CONTROLS */

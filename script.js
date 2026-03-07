@@ -4,11 +4,41 @@ const info   = document.getElementById("hotspot-info");
 let tourIndex = -1;
 let backgroundEnabled = false;
 
-// Restore your original camera style
-const PHI    = 1.2;   // ~69°
-const RADIUS = 0.8;   // close view
+// CAMERA CONSTANTS
+const PHI_HOTSPOT = 0.349;      // 20°
+const PHI_SITE    = 1.22173;    // 70°
 
-// Text for each hotspot
+// CAMERA OFFSETS (your table)
+const cameraOffsets = {
+  1:  Math.PI / 2,
+  2:  0,
+  3: -Math.PI,
+  4: -Math.PI,
+  5: -Math.PI,
+  6: -Math.PI,
+  7:  Math.PI / 2,
+  8:  0,
+  9: -Math.PI,
+  10: 0,
+  11: -Math.PI
+};
+
+// CAMERA RADII (your table)
+const cameraRadius = {
+  1: 3,
+  2: 1,
+  3: 3,
+  4: 3,
+  5: 1,
+  6: 1,
+  7: 3,
+  8: 3,
+  9: 3,
+  10: 3,
+  11: 1
+};
+
+// TEXT FOR EACH HOTSPOT
 const steps = [
   { id: 1,  text: "Wastewater from the sewer network travels down this pipe before entering the storm tank." },
   { id: 2,  text: "When the sewer fills up during heavy rain the water level rises." },
@@ -54,14 +84,16 @@ function updateHotspots(id) {
 function showInfo(text) {
   info.innerText = text;
   info.classList.remove("hidden");
+  info.classList.add("active");
 }
 
 function hideInfo() {
   info.classList.add("hidden");
+  info.classList.remove("active");
 }
 
-/* CAMERA MOVEMENT (RESTORED ORIGINAL STYLE) */
-function moveCamera(hotspot) {
+/* CAMERA MOVEMENT WITH OFFSETS + RADII */
+function moveCamera(hotspot, id) {
   if (!hotspot) return;
 
   const [x, y, z] = hotspot.dataset.position
@@ -69,19 +101,22 @@ function moveCamera(hotspot) {
     .map(v => parseFloat(v.replace("m", "")));
 
   let theta = Math.atan2(z, x);
+  theta += cameraOffsets[id];
 
-  viewer.cameraOrbit  = `${theta}rad ${PHI}rad ${RADIUS}m`;
+  const radius = cameraRadius[id];
+
+  viewer.cameraOrbit  = `${theta}rad ${PHI_HOTSPOT}rad ${radius}m`;
   viewer.cameraTarget = `${x}m ${y}m ${z}m`;
 }
 
-/* ACTIVATE A HOTSPOT BY ID */
+/* ACTIVATE A HOTSPOT */
 function activateHotspot(id) {
   const hotspot = viewer.querySelector(`[slot="hotspot-${id}"]`);
   if (!hotspot) return;
 
   updateHotspots(id);
   highlightMenu(id);
-  moveCamera(hotspot);
+  moveCamera(hotspot, id);
 
   const step = getStepById(id);
   if (step) showInfo(step.text);
@@ -107,74 +142,6 @@ function prevStep() {
   }
 }
 
-/* BUTTONS: TOUR CONTROLS */
+/* TOUR BUTTONS */
 document.getElementById("tour-start").onclick = startTour;
-document.getElementById("tour-next").onclick  = nextStep;
-document.getElementById("tour-prev").onclick  = prevStep;
-
-/* MENU BUTTON TOGGLE */
-document.getElementById("menu-button").onclick = () => {
-  document.getElementById("menu-panel").classList.toggle("hidden");
-};
-
-/* MENU ITEM CLICKS */
-document.querySelectorAll(".menu-item").forEach(btn => {
-  btn.onclick = () => {
-    const target = btn.dataset.target;
-
-    if (target === "site") {
-      // Reset to a nice overview and clear selection
-      document.querySelectorAll(".Hotspot").forEach(h => {
-        h.classList.remove("active", "dimmed");
-      });
-      highlightMenu("site");
-      hideInfo();
-
-      // Simple overview orbit (you can tweak these numbers)
-      viewer.cameraOrbit  = `0deg 75deg 40m`;
-      viewer.cameraTarget = `0m 5m 0m`;
-      return;
-    }
-
-    const id = parseInt(target);
-    tourIndex = steps.findIndex(s => s.id === id);
-    activateHotspot(id);
-  };
-});
-
-/* CLICKING HOTSPOTS IN 3D VIEW */
-viewer.addEventListener("load", () => {
-  viewer.querySelectorAll(".Hotspot").forEach(h => {
-    h.addEventListener("click", () => {
-      const id = parseInt(h.slot.replace("hotspot-", ""));
-      tourIndex = steps.findIndex(s => s.id === id);
-      activateHotspot(id);
-    });
-  });
-});
-
-/* SPECIAL EFFECT TOGGLE */
-const toggleBtn = document.getElementById("toggle-background");
-
-toggleBtn.onclick = () => {
-  backgroundEnabled = !backgroundEnabled;
-
-  if (backgroundEnabled) {
-    viewer.environmentImage = "spruit_sunrise_1k_HDR.hdr";
-    toggleBtn.classList.add("active");
-    toggleBtn.classList.remove("inactive");
-  } else {
-    viewer.removeAttribute("environment-image");
-    toggleBtn.classList.remove("active");
-    toggleBtn.classList.add("inactive");
-  }
-};
-
-/* AR BUTTON */
-document.getElementById("ar-button").onclick = () => {
-  if (viewer.canActivateAR) {
-    viewer.activateAR();
-  } else {
-    alert("AR is not supported on this device.");
-  }
-};
+document.getElementById("

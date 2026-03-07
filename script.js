@@ -46,7 +46,7 @@ const steps = [
   { id: 4,  text: "This tank stores extra stormwater underground until the sewers have space for it again." },
   { id: 5,  text: "The pumps move any remaining stormwater out of the storage tank and send it back to the treatment works to be cleaned once the heavy rain has passed." },
   { id: 6,  text: "The taps act like a one-way system to let water flow out of the storage tank, but close if it tries to flow back the wrong way. This keeps the flow moving safely back to the sewer network after the heavy rain has passed." },
-  { id: 7,  text: "The overflow is only used when both the storm tank and storage tank are completely full. When this happens, any extra stormwater is screened before it’s released into the river." },
+  { id: 7,  text: "Once the heavy rain has passed, this pipe carries the stormwater that’s been emptied from the storage tank back into the sewer network where it continues on to the treatment works as normal." },
   { id: 8,  text: "This pipe carries wastewater to the treatment works where it is cleaned. It’s always in use, but the pipes above only come into use during heavy rainfall, when the water level rises high enough to reach them." },
   { id: 9,  text: "This provides the electricity needed to power the pumps and the screen so the tanks can work properly during and after heavy rain." },
   { id: 10, text: "The overflow is only used when both the storm tank and storage tank are completely full. When this happens, any extra stormwater is screened before it’s released into the river." },

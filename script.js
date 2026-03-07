@@ -5,7 +5,7 @@ let tourIndex = -1;
 let backgroundEnabled = false;
 
 // CAMERA CONSTANTS
-const PHI_HOTSPOT = 1.22173;    // 70°
+const PHI_HOTSPOT = 0.349;      // 20°
 const PHI_SITE    = 1.22173;    // 70°
 
 // CAMERA OFFSETS (per-hotspot, as requested)
@@ -159,7 +159,7 @@ document.querySelectorAll(".menu-item").forEach(btn => {
     const target = btn.dataset.target;
 
     if (target === "site") {
-      // CSO Site: use Tank inlet target, phi = 70°, radius = 40
+      // CSO Site: use Tank inlet target, phi = 70°, radius = 40, rotated 180°
       const tankInlet = viewer.querySelector('[slot="hotspot-3"]');
       if (!tankInlet) return;
 
@@ -167,7 +167,8 @@ document.querySelectorAll(".menu-item").forEach(btn => {
         .split(" ")
         .map(v => parseFloat(v.replace("m", "")));
 
-      let theta = Math.atan2(z, x); // per-hotspot style, based on tank inlet
+      let theta = Math.atan2(z, x);
+      theta += Math.PI; // rotate 180 degrees
 
       document.querySelectorAll(".Hotspot").forEach(h => {
         h.classList.remove("active", "dimmed");

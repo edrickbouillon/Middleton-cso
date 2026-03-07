@@ -123,6 +123,8 @@ model-viewer {
   font-size: 12px;
   white-space: nowrap;
   pointer-events: none;
+
+  display: none; /* ADD THIS */
 }
 
 .progress-bar {

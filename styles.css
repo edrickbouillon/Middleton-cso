@@ -139,29 +139,35 @@ model-viewer {
   100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(255,255,255,0); }
 }
 
-/* We are not using inline annotations now */
-.HotspotAnnotation {
-  display: none;
-}
-
-/* FIXED INFO BOX (TOP-RIGHT) */
+/* FIXED INFO BOX */
 #hotspot-info {
   position: fixed;
   top: 70px;
   right: 20px;
   max-width: 280px;
-  background: rgba(18,28,66,.85);
+  background: rgba(18,28,66,0.75);
   backdrop-filter: blur(6px);
   color: white;
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 13px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
   z-index: 300;
   box-shadow: 0 4px 12px rgba(0,0,0,.25);
 }
 
 #hotspot-info.hidden {
   display: none;
+}
+
+/* Glow when active */
+#hotspot-info.active {
+  animation: infoPulse 2s infinite;
+}
+
+@keyframes infoPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.6); }
+  70%  { box-shadow: 0 0 12px 6px rgba(255,255,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
 }
 
 /* TOUR CONTROLS */

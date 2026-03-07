@@ -5,7 +5,7 @@ let tourIndex = -1;
 let backgroundEnabled = false;
 
 // CAMERA CONSTANTS
-const PHI_HOTSPOT = 0.349;      // 20°
+const PHI_HOTSPOT = 1.22173;    // 70°
 const PHI_SITE    = 1.22173;    // 70°
 
 // CAMERA OFFSETS (per-hotspot, as requested)

@@ -1,127 +1,143 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>Interactive 3D Tour</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<title>Interactive 3D Tour</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css">
 
-  <!-- Model Viewer -->
-  <script type="module"
-    src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js">
-  </script>
+<script type="module"
+src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js">
+</script>
+
 </head>
 
 <body>
 
-<!-- TOP BRANDING BAR -->
+<!-- TOP BAR -->
+
 <div id="branding-bar">
-  <button id="menu-button">≣</button>
-  <img id="branding-logo" src="client-logo.png" alt="Client Logo">
-  <span id="branding-title">Interactive 3D Tour</span>
+
+<button id="menu-button">≣</button>
+
+<img id="branding-logo" src="client-logo.png">
+
+<span id="branding-title">Interactive 3D Tour</span>
+
 </div>
 
-<!-- SLIDE-DOWN MENU (HOTSPOT LIST) -->
+
+<!-- MENU -->
+
 <div id="menu-panel" class="hidden">
-  <button class="menu-item" data-target="site">CSO Site</button>
-  <button class="menu-item" data-target="1">Wastewater</button>
-  <button class="menu-item" data-target="2">Spill to storm tank</button>
-  <button class="menu-item" data-target="3">Tank inlet</button>
-  <button class="menu-item" data-target="4">Underground storage tank</button>
-  <button class="menu-item" data-target="5">Pumps</button>
-  <button class="menu-item" data-target="6">Taps</button>
-  <button class="menu-item" data-target="7">Return water</button>
-  <button class="menu-item" data-target="8">Treatment works</button>
-  <button class="menu-item" data-target="9">Power supply</button>
-  <button class="menu-item" data-target="10">Overflow</button>
-  <button class="menu-item" data-target="11">Engineer</button>
+
+<button class="menu-item" data-target="site">CSO Site</button>
+
+<button class="menu-item" data-target="1">Wastewater</button>
+<button class="menu-item" data-target="2">Spill to storm tank</button>
+<button class="menu-item" data-target="3">Tank inlet</button>
+<button class="menu-item" data-target="4">Storage tank</button>
+<button class="menu-item" data-target="5">Pumps</button>
+<button class="menu-item" data-target="6">Taps</button>
+<button class="menu-item" data-target="7">Return water</button>
+<button class="menu-item" data-target="8">Treatment works</button>
+<button class="menu-item" data-target="9">Power supply</button>
+<button class="menu-item" data-target="10">Overflow</button>
+<button class="menu-item" data-target="11">Engineer</button>
+
+<button id="toggle-background" class="menu-toggle inactive">
+Background
+</button>
+
 </div>
 
-<!-- FLOATING EXPLANATION BUBBLE -->
-<div id="floating-bubble" class="hidden"></div>
 
-<!-- MODEL VIEWER -->
+<!-- HOTSPOT INFO -->
+
+<div id="hotspot-info" class="hidden"></div>
+
+
+<!-- MODEL -->
+
 <model-viewer
-  id="viewer"
-  src="Middleton CSO 05.glb"
-  camera-controls
-  camera-target="auto"
-  ar
-  ar-modes="webxr scene-viewer quick-look"
-  ar-scale="fixed"
-  ar-placement="floor"
-  shadow-intensity="1"
-  tone-mapping="neutral"
-  exposure="1"
-  background-color="#ffffff"
+id="viewer"
+src="Middleton CSO 05.glb"
+camera-controls
+ar
+shadow-intensity="1"
+tone-mapping="neutral"
+exposure="1"
+background-color="#ffffff"
 >
 
-  <!-- HOTSPOTS -->
-  <button class="Hotspot" slot="hotspot-1"
-    data-position="-46.31893321217518m 9.458862646186729m -16.947827835773218m">
-      <div class="HotspotAnnotation">Wastewater</div>
-  </button>
+<!-- HOTSPOTS -->
 
-  <button class="Hotspot" slot="hotspot-2"
-    data-position="-33.435490361278895m 11.118663582498588m -23.969934160624458m">
-      <div class="HotspotAnnotation">Spill to storm tank</div>
-  </button>
+<button class="Hotspot" slot="hotspot-1" data-position="-46.3m 9.4m -16.9m">
+<div class="HotspotAnnotation">Wastewater</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-3"
-    data-position="-19.0675709395093m 10.737494542218105m -14.103194478730433m">
-      <div class="HotspotAnnotation">Tank inlet</div>
-  </button>
+<button class="Hotspot" slot="hotspot-2" data-position="-33.4m 11.1m -23.9m">
+<div class="HotspotAnnotation">Spill</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-4"
-    data-position="-16.57981622940034m 3.491531152947519m -9.891652321211414m">
-      <div class="HotspotAnnotation">Underground storage tank</div>
-  </button>
+<button class="Hotspot" slot="hotspot-3" data-position="-19.0m 10.7m -14.1m">
+<div class="HotspotAnnotation">Inlet</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-5"
-    data-position="-21.179182282780225m 3.1961747300631744m -7.70057518127105m">
-      <div class="HotspotAnnotation">Pumps</div>
-  </button>
+<button class="Hotspot" slot="hotspot-4" data-position="-16.5m 3.4m -9.8m">
+<div class="HotspotAnnotation">Tank</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-6"
-    data-position="-27.281981608117846m 12.284016153541817m -4.880074435605172m">
-      <div class="HotspotAnnotation">Taps</div>
-  </button>
+<button class="Hotspot" slot="hotspot-5" data-position="-21.1m 3.1m -7.7m">
+<div class="HotspotAnnotation">Pumps</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-7"
-    data-position="-44.179459737314986m 11.635006728184575m -17.77565763945174m">
-      <div class="HotspotAnnotation">Return water</div>
-  </button>
+<button class="Hotspot" slot="hotspot-6" data-position="-27.2m 12.2m -4.8m">
+<div class="HotspotAnnotation">Taps</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-8"
-    data-position="-22.38340534564503m 8.94654207351823m -30.66650682295832m">
-      <div class="HotspotAnnotation">Treatment works</div>
-  </button>
+<button class="Hotspot" slot="hotspot-7" data-position="-44.1m 11.6m -17.7m">
+<div class="HotspotAnnotation">Return</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-9"
-    data-position="-5.421687813974798m 14.749722484546155m -6.913118326844746m">
-      <div class="HotspotAnnotation">Power supply</div>
-  </button>
+<button class="Hotspot" slot="hotspot-8" data-position="-22.3m 8.9m -30.6m">
+<div class="HotspotAnnotation">Treatment</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-10"
-    data-position="-14.890668307790538m 10.736173845503009m -39.284940426003146m">
-      <div class="HotspotAnnotation">Overflow</div>
-  </button>
+<button class="Hotspot" slot="hotspot-9" data-position="-5.4m 14.7m -6.9m">
+<div class="HotspotAnnotation">Power</div>
+</button>
 
-  <button class="Hotspot" slot="hotspot-11"
-    data-position="-28.010850112819504m 12.45037162808081m -7.081012647661171m">
-      <div class="HotspotAnnotation">Engineer</div>
-  </button>
+<button class="Hotspot" slot="hotspot-10" data-position="-14.8m 10.7m -39.2m">
+<div class="HotspotAnnotation">Overflow</div>
+</button>
 
-  <div class="progress-bar" slot="progress-bar">
-    <div class="update-bar"></div>
-  </div>
+<button class="Hotspot" slot="hotspot-11" data-position="-28.0m 12.4m -7.0m">
+<div class="HotspotAnnotation">Engineer</div>
+</button>
 
 </model-viewer>
 
+
+<!-- TOUR CONTROLS -->
+
+<div id="tour-controls">
+
+<button id="tour-start">Start Tour</button>
+<button id="tour-prev">Prev</button>
+<button id="tour-next">Next</button>
+
+</div>
+
+
 <!-- AR BUTTON -->
+
 <button id="ar-button">Enter AR</button>
 
+
 <script src="script.js"></script>
+
 </body>
 </html>

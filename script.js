@@ -78,7 +78,7 @@ function moveCameraToHotspot(hotspotEl, id) {
 
   const radius = cameraRadius[id];
 
-  viewer.cameraOrbit = `${theta}rad ${PHI_HOTSPOT}rad ${radius}m`;
+  viewer.cameraOrbit = `${theta}rad ${PHI}rad ${radius}m`;
   viewer.cameraTarget = `${x}m ${y}m ${z}m`;
 }
 

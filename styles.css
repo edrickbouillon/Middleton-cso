@@ -8,6 +8,10 @@ html, body {
   color: #121C42;
 }
 
+/* =========================
+   TOP BRANDING BAR
+========================= */
+
 #branding-bar {
   position: fixed;
   top: 0;
@@ -30,6 +34,11 @@ html, body {
   cursor: pointer;
   color: #121C42;
   margin-right: 15px;
+  transition: transform 0.2s ease;
+}
+
+#menu-button:hover {
+  transform: scale(1.1);
 }
 
 #branding-logo {
@@ -42,33 +51,61 @@ html, body {
   font-weight: bold;
 }
 
+/* =========================
+   SLIDE MENU
+========================= */
+
 #menu-panel {
   position: fixed;
   top: 60px;
   left: 0;
-  width: 240px;
-  background: #121C42;
-  padding: 15px;
+  width: 220px;
+
+  background: rgba(18, 28, 66, 0.75);
+  backdrop-filter: blur(6px);
+
+  padding: 12px;
   z-index: 200;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.25s ease;
+}
+
+#menu-panel:not(.hidden) {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 #menu-panel.hidden {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
+
+/* =========================
+   MENU BUTTONS
+========================= */
 
 .menu-item {
   width: 100%;
   background: #0089CF;
   color: white;
   border: none;
-  padding: 14px 18px;
-  border-radius: 50px;
-  font-size: 15px;
-  font-weight: bold;
-  margin-bottom: 12px;
+
+  padding: 10px 14px;
+  border-radius: 40px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  margin-bottom: 8px;
+
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
   transition: background 0.2s ease, transform 0.15s ease;
 }
 
@@ -76,6 +113,14 @@ html, body {
   background: #3C57E8;
   transform: scale(1.03);
 }
+
+.menu-item.active {
+  background: #3C57E8;
+}
+
+/* =========================
+   INFO BUBBLE
+========================= */
 
 #floating-bubble {
   position: fixed;
@@ -95,6 +140,10 @@ html, body {
   display: none;
 }
 
+/* =========================
+   MODEL VIEWER
+========================= */
+
 model-viewer {
   position: absolute;
   top: 60px;
@@ -105,6 +154,10 @@ model-viewer {
   z-index: 1;
 }
 
+/* =========================
+   HOTSPOTS
+========================= */
+
 .Hotspot {
   background: #0089CF;
   border-radius: 50%;
@@ -113,6 +166,8 @@ model-viewer {
   border: none;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0,137,207,0.8);
+
+  animation: pulse 2s 3;
 }
 
 .HotspotAnnotation {
@@ -124,8 +179,12 @@ model-viewer {
   white-space: nowrap;
   pointer-events: none;
 
-  display: none; /* ADD THIS */
+  display: none;
 }
+
+/* =========================
+   LOADING BAR
+========================= */
 
 .progress-bar {
   width: 30%;
@@ -141,6 +200,20 @@ model-viewer {
   border-radius: 4px;
 }
 
+/* =========================
+   HOTSPOT PULSE ANIMATION
+========================= */
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,137,207,0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(0,137,207,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,137,207,0); }
+}
+
+/* =========================
+   AR BUTTON
+========================= */
+
 #ar-button {
   position: fixed;
   bottom: 20px;
@@ -154,6 +227,7 @@ model-viewer {
   cursor: pointer;
   z-index: 150;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 #ar-button:hover {

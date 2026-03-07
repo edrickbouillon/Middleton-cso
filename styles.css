@@ -1,196 +1,116 @@
-html,body{
+body{
 margin:0;
-padding:0;
-height:100%;
-overflow:hidden;
-font-family:Arial;
-background:#ffffff;
-color:#121C42;
+font-family:Arial, Helvetica, sans-serif;
+background:#111;
 }
 
-/* TOP BAR */
-
-#branding-bar{
-position:fixed;
-top:0;
-left:0;
-height:60px;
-width:100vw;
-background:white;
+.topBar{
+height:70px;
+background:#0b2a4a;
+color:white;
 display:flex;
 align-items:center;
-padding:0 10px;
-z-index:100;
-box-shadow:0 2px 6px rgba(0,0,0,0.15);
-}
-
-#menu-button{
-background:none;
-border:none;
-font-size:28px;
-cursor:pointer;
-margin-right:15px;
-}
-
-#branding-logo{
-height:42px;
-margin-right:15px;
-}
-
-/* MENU */
-
-#menu-panel{
-position:fixed;
-top:60px;
-left:0;
-width:220px;
-background:rgba(18,28,66,0.75);
-backdrop-filter:blur(6px);
-padding:12px;
-border-bottom-right-radius:18px;
-box-shadow:0 6px 16px rgba(0,0,0,0.35);
-z-index:200;
-transform:translateY(-20px);
-opacity:0;
-transition:all .25s;
-}
-
-#menu-panel:not(.hidden){
-transform:translateY(0);
-opacity:1;
-}
-
-.menu-item{
-width:100%;
-background:#0089CF;
-color:white;
-border:none;
-padding:10px 14px;
-border-radius:40px;
-font-size:13px;
+padding-left:25px;
 font-weight:600;
-margin-bottom:8px;
-cursor:pointer;
 }
 
-.menu-item.active{
-background:#003f8a;
-}
-
-/* SPECIAL EFFECT BUTTON */
-
-.menu-toggle{
+.viewerContainer{
 width:100%;
-border:none;
-padding:10px;
-border-radius:40px;
-cursor:pointer;
-font-weight:bold;
-margin-top:10px;
+height:calc(100vh - 70px);
+position:relative;
 }
-
-.menu-toggle.inactive{
-background:#7DBBE6;
-}
-
-.menu-toggle.active{
-background:#003f8a;
-color:white;
-}
-
-/* MODEL VIEWER */
 
 model-viewer{
-position:absolute;
-top:60px;
-width:100vw;
-height:calc(100vh - 60px);
+width:100%;
+height:100%;
+background:#000;
 }
 
-/* HOTSPOTS */
+.menu{
+position:absolute;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+gap:12px;
+}
 
-.Hotspot{
-width:26px;
-height:26px;
+.menuItem{
+padding:10px 18px;
+border:none;
+background:#2e6fbf;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-size:14px;
+}
+
+.menuItem.active{
+background:#0b3d8c;
+}
+
+#specialEffect{
+padding:10px 18px;
+border:none;
+background:#444;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+#specialEffect.active{
+background:#0b3d8c;
+}
+
+.hotspot{
+width:22px;
+height:22px;
 border-radius:50%;
-background:#0089CF;
+background:#1a6aff;
 border:none;
 cursor:pointer;
-transition:opacity .4s;
 }
 
-.HotspotAnnotation{
-display:none;
-}
-
-.Hotspot.dimmed{
-opacity:.15;
-}
-
-.Hotspot.active{
+.hotspot.active{
 background:white;
-animation:pulse 1.8s infinite;
+animation:pulse 1.6s infinite;
 }
 
 @keyframes pulse{
-0%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,255,255,.9)}
-70%{transform:scale(1.2);box-shadow:0 0 0 14px rgba(255,255,255,0)}
-100%{transform:scale(1)}
+
+0%{
+transform:scale(1);
+box-shadow:0 0 0 0 rgba(255,255,255,0.7);
 }
 
-/* INFO BOX */
+70%{
+transform:scale(1.3);
+box-shadow:0 0 0 15px rgba(255,255,255,0);
+}
 
-#hotspot-info{
-position:fixed;
-max-width:260px;
-background:rgba(18,28,66,.75);
-backdrop-filter:blur(6px);
+100%{
+transform:scale(1);
+}
+
+}
+
+/* hide default label text */
+.hotspot span{
+display:none !important;
+}
+
+/* fixed explanation panel */
+
+#hotspotInfo{
+position:absolute;
+top:85px;
+right:30px;
+width:320px;
+background:rgba(0,0,0,0.75);
 color:white;
-padding:10px 14px;
+padding:18px;
 border-radius:10px;
-font-size:13px;
-z-index:300;
-transform:translate(-50%,0);
-box-shadow:0 4px 12px rgba(0,0,0,.25);
-}
-
-#hotspot-info.hidden{
+font-size:14px;
+line-height:1.4;
 display:none;
-}
-
-/* TOUR CONTROLS */
-
-#tour-controls{
-position:fixed;
-bottom:20px;
-left:20px;
-background:rgba(18,28,66,.8);
-padding:10px;
-border-radius:12px;
-display:flex;
-gap:8px;
-z-index:150;
-}
-
-#tour-controls button{
-background:#0089CF;
-color:white;
-border:none;
-padding:8px 12px;
-border-radius:20px;
-cursor:pointer;
-}
-
-/* AR BUTTON */
-
-#ar-button{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#0089CF;
-color:white;
-border:none;
-padding:14px 18px;
-border-radius:50px;
-cursor:pointer;
 }

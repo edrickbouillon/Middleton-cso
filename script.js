@@ -1,128 +1,129 @@
-const viewer = document.getElementById("viewer");
+const viewer=document.getElementById("viewer");
+const info=document.getElementById("hotspot-info");
 
-viewer.addEventListener("progress", (e) => {
-  const bar = viewer.querySelector(".update-bar");
-  bar.style.width = `${e.detail.totalProgress * 100}%`;
+let tourIndex=-1;
+let backgroundEnabled=false;
+
+const steps=[
+{ id:1,text:"Wastewater from the sewer network travels down this pipe before entering the storm tank."},
+{ id:2,text:"When the sewer fills up during heavy rain the water level rises."},
+{ id:3,text:"This is where stormwater enters the tank."},
+{ id:4,text:"The tank stores excess stormwater underground."},
+{ id:5,text:"Pumps remove stored stormwater."},
+{ id:6,text:"The taps allow one-way flow."},
+{ id:7,text:"Water returns to the sewer network."},
+{ id:8,text:"Wastewater goes to treatment works."},
+{ id:9,text:"Electricity powers the pumps."},
+{ id:10,text:"Overflow used only when tanks full."},
+{ id:11,text:"Engineer checks equipment."}
+];
+
+function updateHotspots(id){
+
+document.querySelectorAll(".Hotspot").forEach(h=>{
+h.classList.remove("active");
+h.classList.add("dimmed");
 });
 
-const hotspotInfo = {
-  1: { text: "Wastewater from the sewer network travels down this pipe before entering the storm tank." },
-  2: { text: "When the sewer fills up during heavy rain, wastewater mixes with rainwater and causes the water level to rise." },
-  3: { text: "This is where stormwater enters the storage tank during heavy rain." },
-  4: { text: "This tank stores extra stormwater underground until the sewers have space for it again." },
-  5: { text: "The pumps move any remaining stormwater out of the storage tank." },
-  6: { text: "The taps act like a one-way system to let water flow out of the storage tank." },
-  7: { text: "This pipe carries stormwater emptied from the storage tank back into the sewer network." },
-  8: { text: "This pipe carries wastewater to the treatment works where it is cleaned." },
-  9: { text: "This provides the electricity needed to power the pumps and the screen." },
-  10:{ text: "The overflow is only used when both tanks are completely full." },
-  11:{ text: "The engineer checks the tank and equipment to ensure everything works properly." }
+const active=viewer.querySelector(`[slot="hotspot-${id}"]`);
+
+active.classList.add("active");
+active.classList.remove("dimmed");
+
+}
+
+function showInfo(text,position){
+
+const [x,y,z]=position.split(" ").map(parseFloat);
+
+const screen=viewer.positionAndNormalFromPoint({x,y:y-0.5,z});
+
+info.innerText=text;
+info.classList.remove("hidden");
+
+info.style.left=screen.position.x+"px";
+info.style.top=(screen.position.y+35)+"px";
+
+}
+
+function activateHotspot(id){
+
+const hotspot=viewer.querySelector(`[slot="hotspot-${id}"]`);
+
+updateHotspots(id);
+
+showInfo(
+steps.find(s=>s.id===id).text,
+hotspot.dataset.position
+);
+
+}
+
+function startTour(){
+
+tourIndex=0;
+activateHotspot(steps[tourIndex].id);
+
+}
+
+function nextStep(){
+
+if(tourIndex<steps.length-1){
+
+tourIndex++;
+activateHotspot(steps[tourIndex].id);
+
+}
+
+}
+
+function prevStep(){
+
+if(tourIndex>0){
+
+tourIndex--;
+activateHotspot(steps[tourIndex].id);
+
+}
+
+}
+
+document.getElementById("tour-start").onclick=startTour;
+document.getElementById("tour-next").onclick=nextStep;
+document.getElementById("tour-prev").onclick=prevStep;
+
+document.querySelectorAll(".menu-item").forEach(btn=>{
+
+btn.onclick=()=>{
+
+activateHotspot(parseInt(btn.dataset.target));
+
 };
 
-const cameraOffsets = {
-  1:  Math.PI / 2,
-  2:  0,
-  3: -Math.PI,
-  4: -Math.PI,
-  5: -Math.PI,
-  6: -Math.PI,
-  7:  Math.PI / 2,
-  8:  0,
-  9: -Math.PI,
-  10: 0,
-  11: -Math.PI
-};
-
-const cameraRadius = {
-  1: 3,
-  2: 1,
-  3: 3,
-  4: 3,
-  5: 1,
-  6: 1,
-  7: 3,
-  8: 3,
-  9: 3,
-  10: 3,
-  11: 1
-};
-
-const PHI = 1.22173; // 70° in radians
-
-const bubble = document.getElementById("floating-bubble");
-
-function showBubble(text, position) {
-  bubble.innerText = text;
-  bubble.classList.remove("hidden");
-
-  const [x, y, z] = position.split(" ").map(parseFloat);
-  const offset = { x, y: y - 0.5, z };
-
-  const screen = viewer.positionAndNormalFromPoint(offset);
-
-  if (screen && screen.position) {
-    bubble.style.left = `${screen.position.x}px`;
-    bubble.style.top = `${screen.position.y}px`;
-  }
-}
-
-function hideBubble() {
-  bubble.classList.add("hidden");
-}
-
-function moveCameraToHotspot(hotspotEl, id) {
-  const [x, y, z] = hotspotEl.dataset.position.split(" ").map(parseFloat);
-
-  let theta = Math.atan2(z, x);
-  theta += cameraOffsets[id];
-
-  const radius = cameraRadius[id];
-
-  viewer.cameraOrbit = `${theta}rad ${PHI}rad ${radius}m`;
-  viewer.cameraTarget = `${x}m ${y}m ${z}m`;
-}
-
-function activateHotspot(id) {
-  hideBubble();
-
-  viewer.querySelectorAll(".HotspotAnnotation").forEach(a => {
-    a.style.display = "none";
-  });
-
-  const hotspotEl = viewer.querySelector(`[slot="hotspot-${id}"]`);
-  if (!hotspotEl) return;
-
-  hotspotEl.querySelector(".HotspotAnnotation").style.display = "block";
-
-  moveCameraToHotspot(hotspotEl, id);
-
-  showBubble(hotspotInfo[id].text, hotspotEl.dataset.position);
-}
-
-document.querySelectorAll(".menu-item").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const target = btn.dataset.target;
-
-    if (target === "site") {
-      const tankInlet = viewer.querySelector('[slot="hotspot-3"]');
-      const [x, y, z] = tankInlet.dataset.position.split(" ").map(parseFloat);
-
-      viewer.cameraOrbit = `0rad ${PHI_SITE}rad 40m`;
-      viewer.cameraTarget = `${x}m ${y}m ${z}m`;
-
-      hideBubble();
-      return;
-    }
-
-    activateHotspot(parseInt(target));
-  });
 });
 
-document.getElementById("menu-button").onclick = () => {
-  document.getElementById("menu-panel").classList.toggle("hidden");
+document.getElementById("menu-button").onclick=()=>{
+document.getElementById("menu-panel").classList.toggle("hidden");
 };
 
-document.getElementById("ar-button").addEventListener("click", () => {
-  if (viewer.canActivateAR) viewer.activateAR();
-  else alert("AR is not supported on this device.");
-});
+const toggleBtn=document.getElementById("toggle-background");
+
+toggleBtn.onclick=()=>{
+
+backgroundEnabled=!backgroundEnabled;
+
+if(backgroundEnabled){
+
+viewer.environmentImage="spruit_sunrise_1k_HDR.hdr";
+toggleBtn.classList.add("active");
+toggleBtn.classList.remove("inactive");
+
+}else{
+
+viewer.removeAttribute("environment-image");
+toggleBtn.classList.remove("active");
+toggleBtn.classList.add("inactive");
+
+}
+
+};

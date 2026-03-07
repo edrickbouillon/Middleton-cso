@@ -8,7 +8,7 @@ let backgroundEnabled = false;
 const PHI_HOTSPOT = 0.349;      // 20°
 const PHI_SITE    = 1.22173;    // 70°
 
-// CAMERA OFFSETS
+// CAMERA OFFSETS (per-hotspot, as requested)
 const cameraOffsets = {
   1:  Math.PI / 2,
   2:  0,
@@ -23,19 +23,19 @@ const cameraOffsets = {
   11: -Math.PI
 };
 
-// CAMERA RADII
+// CAMERA RADII (0 → 0.1 to avoid invalid camera orbits)
 const cameraRadius = {
   1: 3,
-  2: 0,
+  2: 0.1,
   3: 3,
   4: 3,
-  5: 0,
-  6: 0,
+  5: 0.1,
+  6: 0.1,
   7: 3,
   8: 3,
   9: 3,
   10: 3,
-  11: 0
+  11: 0.1
 };
 
 // TEXT FOR EACH HOTSPOT
@@ -46,10 +46,10 @@ const steps = [
   { id: 4,  text: "This tank stores extra stormwater underground until the sewers have space for it again." },
   { id: 5,  text: "The pumps move any remaining stormwater out of the storage tank and send it back to the treatment works to be cleaned once the heavy rain has passed." },
   { id: 6,  text: "The taps act like a one-way system to let water flow out of the storage tank, but close if it tries to flow back the wrong way. This keeps the flow moving safely back to the sewer network after the heavy rain has passed." },
-  { id: 7,  text: "The overflow is only used when both the storm tank and storage tank are completely full. When this happens, any extra stormwater is screened before it’s released into the river. " },
-  { id: 8,  text: "This pipe carries wastewater to the treatment works where it is cleaned. It’s always in use, but the pipes above only come into use during heavy rainfall, when the water level rises high enough to reach them." },
+  { id: 7,  text: "The overflow is only used when both the storm tank and storage tank are completely full. When this happens, any extra stormwater is screened before it’s released into the river." },
+  { id: 8,  text: "This pipe carries wastewater to the treatment works where it is cleaned. It’s always in use, but the pipes above only come into use during heavy rainfall, when the water level rises high enough to reach them." },
   { id: 9,  text: "This provides the electricity needed to power the pumps and the screen so the tanks can work properly during and after heavy rain." },
-  { id: 10, text: "The overflow is only used when both the storm tank and storage tank are completely full. When this happens, any extra stormwater is screened before it’s released into the river. " },
+  { id: 10, text: "The overflow is only used when both the storm tank and storage tank are completely full. When this happens, any extra stormwater is screened before it’s released into the river." },
   { id: 11, text: "The engineer works hard, checking the tank and equipment to make sure everything is working properly." }
 ];
 
@@ -92,7 +92,7 @@ function hideInfo() {
   info.classList.remove("active");
 }
 
-/* CAMERA MOVEMENT WITH OFFSETS + RADII */
+/* CAMERA MOVEMENT WITH PER-HOTSPOT atan2 + OFFSETS + RADII */
 function moveCamera(hotspot, id) {
   if (!hotspot) return;
 
@@ -100,10 +100,11 @@ function moveCamera(hotspot, id) {
     .split(" ")
     .map(v => parseFloat(v.replace("m", "")));
 
-  let theta = Math.atan2(z, x);
-  theta += cameraOffsets[id];
+  let theta = Math.atan2(z, x);              // per-hotspot direction
+  const offset = cameraOffsets[id] || 0;
+  theta += offset;
 
-  const radius = cameraRadius[id];
+  const radius = cameraRadius[id] || 3;
 
   viewer.cameraOrbit  = `${theta}rad ${PHI_HOTSPOT}rad ${radius}m`;
   viewer.cameraTarget = `${x}m ${y}m ${z}m`;
@@ -144,4 +145,84 @@ function prevStep() {
 
 /* TOUR BUTTONS */
 document.getElementById("tour-start").onclick = startTour;
-document.getElementById("
+document.getElementById("tour-next").onclick  = nextStep;
+document.getElementById("tour-prev").onclick  = prevStep;
+
+/* MENU BUTTON TOGGLE */
+document.getElementById("menu-button").onclick = () => {
+  document.getElementById("menu-panel").classList.toggle("hidden");
+};
+
+/* MENU ITEM CLICKS (including CSO Site) */
+document.querySelectorAll(".menu-item").forEach(btn => {
+  btn.onclick = () => {
+    const target = btn.dataset.target;
+
+    if (target === "site") {
+      // CSO Site: use Tank inlet target, phi = 70°, radius = 40
+      const tankInlet = viewer.querySelector('[slot="hotspot-3"]');
+      if (!tankInlet) return;
+
+      const [x, y, z] = tankInlet.dataset.position
+        .split(" ")
+        .map(v => parseFloat(v.replace("m", "")));
+
+      let theta = Math.atan2(z, x); // per-hotspot style, based on tank inlet
+
+      document.querySelectorAll(".Hotspot").forEach(h => {
+        h.classList.remove("active", "dimmed");
+      });
+
+      highlightMenu("site");
+      hideInfo();
+
+      viewer.cameraOrbit  = `${theta}rad ${PHI_SITE}rad 40m`;
+      viewer.cameraTarget = `${x}m ${y}m ${z}m`;
+      return;
+    }
+
+    const id = parseInt(target);
+    if (Number.isNaN(id)) return;
+
+    tourIndex = steps.findIndex(s => s.id === id);
+    activateHotspot(id);
+  };
+});
+
+/* CLICKING HOTSPOTS IN 3D VIEW */
+viewer.addEventListener("load", () => {
+  viewer.querySelectorAll(".Hotspot").forEach(h => {
+    h.addEventListener("click", () => {
+      const id = parseInt(h.slot.replace("hotspot-", ""));
+      if (Number.isNaN(id)) return;
+      tourIndex = steps.findIndex(s => s.id === id);
+      activateHotspot(id);
+    });
+  });
+});
+
+/* SPECIAL EFFECT TOGGLE */
+const toggleBtn = document.getElementById("toggle-background");
+
+toggleBtn.onclick = () => {
+  backgroundEnabled = !backgroundEnabled;
+
+  if (backgroundEnabled) {
+    viewer.environmentImage = "spruit_sunrise_1k_HDR.hdr";
+    toggleBtn.classList.add("active");
+    toggleBtn.classList.remove("inactive");
+  } else {
+    viewer.removeAttribute("environment-image");
+    toggleBtn.classList.remove("active");
+    toggleBtn.classList.add("inactive");
+  }
+};
+
+/* AR BUTTON */
+document.getElementById("ar-button").onclick = () => {
+  if (viewer.canActivateAR) {
+    viewer.activateAR();
+  } else {
+    alert("AR is not supported on this device.");
+  }
+};

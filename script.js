@@ -2,7 +2,7 @@ const viewer = document.getElementById("viewer");
 const info   = document.getElementById("hotspot-info");
 
 let tourIndex = -1;
-let backgroundEnabled = false;
+let backgroundEnabled = false;   // Special Effect starts OFF
 
 // CAMERA CONSTANTS
 const PHI_HOTSPOT = 1.22173;    // 70°
@@ -202,17 +202,19 @@ viewer.addEventListener("load", () => {
   });
 });
 
-/* SPECIAL EFFECT TOGGLE */
+/* SPECIAL EFFECT TOGGLE — STARTS OFF, CLICK TO ENABLE */
 const toggleBtn = document.getElementById("toggle-background");
 
 toggleBtn.onclick = () => {
   backgroundEnabled = !backgroundEnabled;
 
   if (backgroundEnabled) {
+    // Turn ON
     viewer.environmentImage = "spruit_sunrise_1k_HDR.hdr";
     toggleBtn.classList.add("active");
     toggleBtn.classList.remove("inactive");
   } else {
+    // Turn OFF
     viewer.removeAttribute("environment-image");
     toggleBtn.classList.remove("active");
     toggleBtn.classList.add("inactive");

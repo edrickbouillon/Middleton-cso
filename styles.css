@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body, button, #hotspot-info {
+  font-family: 'Poppins', sans-serif;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -215,4 +221,12 @@ model-viewer {
   padding: 14px 18px;
   border-radius: 50px;
   cursor: pointer;
+}
+
+#hotspot-info .title {
+  display: block;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: white;
 }

@@ -40,17 +40,17 @@ const cameraRadius = {
 
 // TEXT FOR EACH HOTSPOT
 const steps = [
-  { id: 1,  text: "<b>Wastewater<b>  Wastewater from the sewer network travels down this pipe before entering the storm tank." },
-  { id: 2,  text: "<b>Spill to storm tank<b>  When the sewer fills up during heavy rain, wastewater mixes with rainwater and causes the water level to rise. Once it reaches this higher pipe, the excess flow is screened to remove debris before being carried to the storage tank." },
-  { id: 3,  text: "<b>Tank inlet<b>  This is where stormwater enters the storage tank during heavy rain. Most of the time it stays dry, but when the system becomes full, extra stormwater flows in here to stop the sewer network from overflowing." },
-  { id: 4,  text: "<b>Storage tank<b>  This tank stores extra stormwater underground until the sewers have space for it again." },
-  { id: 5,  text: "<b>Pumps<b>  The pumps move any remaining stormwater out of the storage tank and send it back to the treatment works to be cleaned once the heavy rain has passed." },
-  { id: 6,  text: "<b>Taps<b>  The taps act like a one-way system to let water flow out of the storage tank, but close if it tries to flow back the wrong way. This keeps the flow moving safely back to the sewer network after the heavy rain has passed." },
-  { id: 7,  text: "<b>Return water<b>  Once the heavy rain has passed, this pipe carries the stormwater that’s been emptied from the storage tank back into the sewer network where it continues on to the treatment works as normal." },
-  { id: 8,  text: "<b>Treatment works<b>  This pipe carries wastewater to the treatment works where it is cleaned. It’s always in use, but the pipes above only come into use during heavy rainfall, when the water level rises high enough to reach them." },
-  { id: 9,  text: "<b>Power supply<b>  This provides the electricity needed to power the pumps and the screen so the tanks can work properly during and after heavy rain." },
-  { id: 10, text: "<b>Overflow<b>  The overflow is only used when both the storm tank and storage tank are completely full. When this happens, any extra stormwater is screened before it’s released into the river." },
-  { id: 11, text: "<b>Engineer<b>  The engineer works hard, checking the tank and equipment to make sure everything is working properly." }
+  { id: 1,  text: "<b>Wastewater</b><br>  Wastewater from the sewer network travels down this pipe before entering the storm tank." },
+  { id: 2,  text: "<b>Spill to storm tank</b><br>  When the sewer fills up during heavy rain, wastewater mixes with rainwater and causes the water level to rise. Once it reaches this higher pipe, the excess flow is screened to remove debris before being carried to the storage tank." },
+  { id: 3,  text: "<b>Tank inlet</b><br>  This is where stormwater enters the storage tank during heavy rain. Most of the time it stays dry, but when the system becomes full, extra stormwater flows in here to stop the sewer network from overflowing." },
+  { id: 4,  text: "<b>Storage tank</b><br>  This tank stores extra stormwater underground until the sewers have space for it again." },
+  { id: 5,  text: "<b>Pumps</b><br>  The pumps move any remaining stormwater out of the storage tank and send it back to the treatment works to be cleaned once the heavy rain has passed." },
+  { id: 6,  text: "<b>Taps</b><br>  The taps act like a one-way system to let water flow out of the storage tank, but close if it tries to flow back the wrong way. This keeps the flow moving safely back to the sewer network after the heavy rain has passed." },
+  { id: 7,  text: "<b>Return water</b><br>  Once the heavy rain has passed, this pipe carries the stormwater that’s been emptied from the storage tank back into the sewer network where it continues on to the treatment works as normal." },
+  { id: 8,  text: "<b>Treatment works</b><br>  This pipe carries wastewater to the treatment works where it is cleaned. It’s always in use, but the pipes above only come into use during heavy rainfall, when the water level rises high enough to reach them." },
+  { id: 9,  text: "<b>Power supply</b><br>  This provides the electricity needed to power the pumps and the screen so the tanks can work properly during and after heavy rain." },
+  { id: 10, text: "<b>Spill to environment</b><br>  The overflow is only used when both the storm tank and storage tank are completely full. When this happens, any extra stormwater is screened before it’s released into the river." },
+  { id: 11, text: "<b>Engineer</b><br>  The engineer works hard, checking the tank and equipment to make sure everything is working properly." }
 ];
 
 function getStepById(id) {

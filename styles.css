@@ -1,0 +1,332 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* THEME VARIABLES */
+:root {
+  --bg-app: #ffffff;
+  --bg-bar: #ffffff;
+  --fg:     #121C42;
+  --logo-chip-bg: transparent;
+  --logo-chip-pad: 0;
+}
+
+body.dark {
+  --bg-app: #0c1228;
+  --bg-bar: #121C42;
+  --fg:     #ffffff;
+  --logo-chip-bg: #ffffff;
+  --logo-chip-pad: 4px 8px;
+}
+
+/* GLOBAL FONT */
+body, button, #hotspot-info {
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-app);
+  color: var(--fg);
+  transition: background-color .25s ease, color .25s ease;
+}
+
+/* TOP BAR */
+#branding-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 60px;
+  width: 100vw;
+  background: var(--bg-bar);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: background-color .25s ease;
+}
+
+#menu-button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  margin-right: 15px;
+  color: var(--fg);
+  transition: color .25s ease;
+}
+
+#branding-logo {
+  height: 42px;
+  margin-right: 15px;
+  background: var(--logo-chip-bg);
+  padding: var(--logo-chip-pad);
+  border-radius: 8px;
+  box-sizing: content-box;
+  transition: background-color .25s ease, padding .25s ease;
+}
+
+/* Title + water effect share this flex region */
+#branding-water-area {
+  position: relative;
+  flex: 1 1 auto;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+#branding-title {
+  position: relative;
+  z-index: 2;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--fg);
+  padding-left: 4px;
+  transition: color .25s ease;
+}
+
+/* WATER EFFECT (top bar, behind title → right edge) */
+#water-effect {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+
+  /* Fade in from left (transparent at title) to right (full intensity) */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 55%, black 100%);
+          mask-image: linear-gradient(to right, transparent 0%, black 55%, black 100%);
+
+  /* Subtle pipe-interior shading: dark bands at top + bottom edges */
+  box-shadow: inset 0  6px 10px -6px rgba(0,30,80,0.45),
+              inset 0 -6px 10px -6px rgba(0,30,80,0.45);
+}
+
+#water-effect::before,
+#water-effect::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat-x;
+  background-position-y: 50%;
+  will-change: background-position;
+}
+
+/* Wave 1 — front layer, smaller faster ripples (front of pipe flow) */
+#water-effect::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 60' preserveAspectRatio='none'><path d='M0,32 Q75,22 150,32 T300,32 T450,32 T600,32 V60 H0 Z' fill='%230089CF' fill-opacity='0.5'/></svg>");
+  background-size: 600px 100%;
+  animation: waveFlowFast 6s linear infinite;
+}
+
+/* Wave 2 — back layer, slower bulk flow */
+#water-effect::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 60' preserveAspectRatio='none'><path d='M0,40 Q100,30 200,40 T400,40 T600,40 T800,40 V60 H0 Z' fill='%237DBBE6' fill-opacity='0.55'/></svg>");
+  background-size: 800px 100%;
+  animation: waveFlowSlow 14s linear infinite;
+}
+
+body.dark #water-effect::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 60' preserveAspectRatio='none'><path d='M0,32 Q75,22 150,32 T300,32 T450,32 T600,32 V60 H0 Z' fill='%231f4f8a' fill-opacity='0.9'/></svg>");
+}
+body.dark #water-effect::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 60' preserveAspectRatio='none'><path d='M0,40 Q100,30 200,40 T400,40 T600,40 T800,40 V60 H0 Z' fill='%232c6fb0' fill-opacity='0.75'/></svg>");
+}
+
+/* Both layers flow in the same direction (left → right) at different speeds */
+@keyframes waveFlowFast {
+  from { background-position-x:   0px; }
+  to   { background-position-x: 600px; }
+}
+@keyframes waveFlowSlow {
+  from { background-position-x:   0px; }
+  to   { background-position-x: 800px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #water-effect::before,
+  #water-effect::after { animation: none; }
+}
+
+/* MENU */
+#menu-panel {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 220px;
+  background: rgba(18,28,66,0.75);
+  backdrop-filter: blur(6px);
+  padding: 12px;
+  border-bottom-right-radius: 18px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  z-index: 200;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all .25s;
+}
+
+#menu-panel.hidden {
+  pointer-events: none;
+}
+
+#menu-panel:not(.hidden) {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-item {
+  width: 100%;
+  background: #0089CF;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.menu-item.active {
+  background: #003f8a;
+}
+
+/* SPECIAL EFFECT BUTTON */
+.menu-toggle {
+  width: 100%;
+  border: none;
+  padding: 10px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.menu-toggle.inactive {
+  background: #7DBBE6;
+}
+
+.menu-toggle.active {
+  background: #003f8a;
+  color: white;
+}
+
+/* MODEL VIEWER */
+model-viewer {
+  position: absolute;
+  top: 60px;
+  width: 100vw;
+  height: calc(100vh - 60px);
+}
+
+/* HOTSPOTS */
+.Hotspot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #0089CF;
+  border: none;
+  cursor: pointer;
+  transition: opacity .4s, transform .2s;
+}
+
+.Hotspot.dimmed {
+  opacity: .15;
+}
+
+.Hotspot.active {
+  background: white;
+  animation: pulse 1.8s infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1);   box-shadow: 0 0 0 0 rgba(255,255,255,.9); }
+  70%  { transform: scale(1.2); box-shadow: 0 0 0 14px rgba(255,255,255,0); }
+  100% { transform: scale(1);   box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+
+/* FIXED INFO BOX */
+#hotspot-info {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  max-width: 280px;
+  background: rgba(18,28,66,0.75);
+  backdrop-filter: blur(6px);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  z-index: 300;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+
+  border: 2px solid rgba(0,63,138,0.4);
+
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+#hotspot-info.hidden {
+  display: none;
+}
+
+#hotspot-info.active {
+  opacity: 1;
+  transform: translateY(0);
+  animation: infoPulse 2s infinite;
+}
+
+@keyframes infoPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(0,63,138,0.6); }
+  70%  { box-shadow: 0 0 14px 8px rgba(0,63,138,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,63,138,0); }
+}
+
+/* TITLE STYLE FOR INFO BOX */
+#hotspot-info .title {
+  display: block;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: white;
+}
+
+/* TOUR CONTROLS */
+#tour-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(18,28,66,.8);
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 150;
+}
+
+#tour-controls button {
+  background: #0089CF;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* AR BUTTON */
+#ar-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0089CF;
+  color: white;
+  border: none;
+  padding: 14px 18px;
+  border-radius: 50px;
+  cursor: pointer;
+}
